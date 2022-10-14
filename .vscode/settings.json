@@ -1,0 +1,12 @@
+{
+  "spellright.notificationClass": "hint",
+  "spellright.language": [
+    "fr"
+  ],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext",
+    "javascript"
+  ]
+}

@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/maladarix/IdleMada/issues"
   },
-  "homepage": "https://github.com/maladarix/IdleMada#readme"
+  "homepage": "https://github.com/maladarix/IdleMada#readme",
+  "dependencies": {
+    "approximate-number": "^2.1.0",
+    "discord.js": "^14.6.0",
+    "fs": "*"
+  }
 }
