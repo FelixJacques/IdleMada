@@ -1,0 +1,19 @@
+{
+  "name": "idlemada",
+  "version": "1.0.0",
+  "description": "Idle Game For Madamada",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maladarix/IdleMada.git"
+  },
+  "author": "Maladarix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maladarix/IdleMada/issues"
+  },
+  "homepage": "https://github.com/maladarix/IdleMada#readme"
+}
