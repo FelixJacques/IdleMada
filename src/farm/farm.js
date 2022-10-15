@@ -1,58 +1,85 @@
-const un = require('./1')
-const deux = require('./2')
-const trois = require('./3')
-const quatre = require('./4')
-const cinq = require('./5')
-const six = require('./6')
-const sept = require('./7')
-const huit = require('./8')
-const neuf = require('./9')
-const dix = require('./10')
+const genji = require('./1genji')
+const health = require('./2health')
+const kana = require('./3kana')
+const pizza = require('./4pizza')
+const levi = require('./5levi')
+const bot = require('./6bot')
+const helico = require('./7helico')
+const tatayeah = require('./8tatayeah')
+const aykicat = require('./9aykicat')
+const bombe = require('./10bombe')
+const belugod = require('./11belugod')
+const widow = require('./12widow')
+const nexus = require('./13nexus')
+const shulker = require('./14shulker')
+const academy = require('./15academy')
+
 
 class Farm{
 
   getAll(){
-    return [this.getUn(), this.getDeux(), this.getTrois(), this.getQuatre(), this.getCinq(), this.getSix(), this.getSept(), this.getHuit(), this.getNeuf(), this.getDix]
+    return [this.genji(), this.health(), this.kana(), this.pizza(), this.levi(), this.bot(), this.helico(), this.tatayeah(), this.aykicat(), this.bombe(), this.belugods(), this.widow(), this.nexus(),
+    this.shulker(), this.academy()]
   }
 
-  getUn(){
-    return new un()
+  genji(){
+    return new genji()
   }
 
-  getDeux(){
-    return new deux()
+  health(){
+    return new health()
   }
 
-  getTrois(){
-    return new trois()
+  kana(){
+    return new kana()
   }
 
-  getQuatre(){
-    return new quatre()
+  pizza(){
+    return new pizza()
   }
 
-  getCinq(){
-    return new cinq()
+  levi(){
+    return new levi()
   }
 
-  getSix(){
-    return new six()
+  bot(){
+    return new bot()
   }
 
-  getSept(){
-    return new sept()
+  helico(){
+    return new helico()
   }
 
-  getHuit(){
-    return new huit()
+  tatayeah(){
+    return new tatayeah()
   }
 
-  getNeuf(){
-    return new neuf()
+  aykicat(){
+    return new aykicat()
   }
 
-  getDix(){
-    return new dix()
+  bombe(){
+    return new bombe()
+  }
+
+  belugods(){
+    return new belugod()
+  }
+
+  widow(){
+    return new widow()
+  }
+
+  nexus(){
+    return new nexus()
+  }
+
+  shulker(){
+    return new shulker()
+  }
+
+  academy(){
+    return new academy()
   }
 }
 
