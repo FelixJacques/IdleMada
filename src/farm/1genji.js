@@ -4,8 +4,8 @@ class genji {
     this.name = "<:littlegenji:307934879277121557> Little genji"
     this.cps = "1"
     this.cost = "64"
-    this.des = "Mascotte du discord, la présence d'un little genji rapporte un peu d'argent à son possesseur."
-    this.img = ""
+    this.des = "Mascotte du discord, la présence d'un Little Genji génère lentement mais surement un peu d'aykicash à son possesseur."
+    this.img = "https://imgur.com/a/OgkhBoR"
   }
 }
 
