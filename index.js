@@ -10,6 +10,10 @@ require("dotenv").config()
 let prefix = "$"
 let listeProfiles = []
 let colorRouge = "#ED4245"
+let colorTurq = "#00ffdd"
+let colorshop = "#4e46bd"
+let colorgold = "#ffdd00"
+let approxOpts = {separator: " ", min10k: true, capital: true, decimal: 2}
 
 fs.readFile('./data/data.json', "utf8", (err, JsonString) => {
   if(err) {
@@ -19,8 +23,29 @@ fs.readFile('./data/data.json', "utf8", (err, JsonString) => {
   }
 })
 
-function profil(player) {
+function intToHex(int) {
+  return (int).toString(16)
+}
+
+function hexToInt(hexa) {
+  let hex = (hexa).toString(16)
+  if (hex.length % 2) { hex = '0' + hex; }
+  let bn = BigInt('0x' + hex);
+  return bn.toString(10); 
+}
+
+function profil(user, interaction) {
   let embedProfil = new EmbedBuilder()
+  .setTitle(`Profil de ${user.displayName}  ||  *Prestige ${user.prestige}* 💎`)
+  .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${interaction.options._hoistedOptions.length == 1 ? interaction.options._hoistedOptions[0].user.avatar : interaction.member.user.avatar}.png?size=256`)
+  .addFields(
+    {name: `AykiCash <:aykicash:1031462420025180160> `, value: `\`${approx(hexToInt(user.money), approxOpts)}\``},
+    {name: `Revenus 📈`, value: `\`+ ${approx(hexToInt("78"), approxOpts)} / sec\``},
+    {name: `Meilleur item ⭐`, value: "Little Genji"}
+  )
+  .setColor(colorTurq)
+  
+  return embedProfil
 }
 
 bot.on("ready", async () => {
@@ -39,7 +64,15 @@ bot.on("ready", async () => {
 
   commands.create({
     name: "p",
-    description: "Affiche ton profil"
+    description: "Affiche ton profil",
+    options: [
+      {
+        name: "user",
+        description: "Voir le profil d'un autre joueur",
+        required: false,
+        type: Discord.ApplicationCommandOptionType.User
+      }
+    ]
   })
 })
 
@@ -51,10 +84,37 @@ bot.on('interactionCreate', async (interaction) => {
   const { commandName, options } = interaction
 
   if(commandName == "p") {
-    interaction.reply({
-      content: "Test",
-      ephemeral: false
-    })
+    let user = null
+    if(interaction.options._hoistedOptions.length != 1) {
+      user = listeProfiles.find(name => {
+        if(name.id == interaction.member.id) {
+          return true
+        }
+        return false
+      })
+    }else{
+      user = listeProfiles.find(name => {
+        if(name.id == interaction.options._hoistedOptions[0].user.id) {
+          return true
+        }
+        return false
+      })
+    }
+
+    if(user == undefined) {
+      interaction.reply("\u200b")
+      setTimeout(() => {
+        interaction.channel.send({embeds: [new EmbedBuilder()
+          .setDescription("Aucun profil associé avec ce compte.")
+          .setColor(colorRouge)]})
+      }, 500);
+      return
+    }
+    
+    interaction.reply("\u200b")
+    setTimeout(() => {
+      interaction.channel.send({embeds: [profil(user, interaction)]})
+    }, 500);
   }
 })
 
@@ -86,10 +146,6 @@ bot.on("messageCreate", async (message) => {
     console.log(listeProfiles)
     fs.writeFile('./data/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
       if(err) throw err;})
-  }
-
-  if(cmd == "profil" || cmd == "p") {
-
   }
 })
 
