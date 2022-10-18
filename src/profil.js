@@ -7,12 +7,12 @@ class Profil {
     this.money = "64"
     this.dispense = "0"
     this.totalMoney = "64"
-    this.cps = 0
+    this.cps = "0"
     this.argentDonne = "0"
     this.prestige = 0
     this.upgradeId = []
     this.achivementsId = []
-    this.genji = {number: 0, disco: false, multi: 1, totalCash: "0"}
+    this.genji = {number: 0, disco: true, multi: 1, totalCash: "0"}
     this.health = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.kana = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.pizza = {number: 0, disco: false, multi: 1, totalCash: "0"}

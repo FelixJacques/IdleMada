@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
 const bot = new Discord.Client({intents: 3276799})
 const Profil = require('./src/profil')
-const {EmbedBuilder} = require('discord.js')
+const Farm = require('./src/farm/farm')
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder} = require('discord.js')
 const fs = require("fs")
 var approx = require('approximate-number');
 
@@ -34,6 +35,37 @@ function hexToInt(hexa) {
   return bn.toString(10); 
 }
 
+function shop(user, interaction) {
+  let embedShop = new EmbedBuilder()
+      .setTitle(`Boutique de ${user.displayName}`)
+      .setColor(colorshop)
+
+      let listeFarm = Farm.prototype.getAll()
+      let desc = ""
+      let farm = null
+      for (let i = 0; i < listeFarm.length; i++) {
+        farm = listeFarm[i]
+        if(user[farm.farm].disco == true) {
+          desc += `**${farm.name}**\n\`${approx(hexToInt(farm.cost), approxOpts)}\` <:aykicash:1031462420025180160>\n`
+        }
+        if(user[listeFarm[i].farm].disco == false && user[listeFarm[i - 1].farm].disco == true) {
+          desc += `*Débloqué prochainement*\n\`???\`\n`
+        }
+      }
+
+      embedShop.setDescription(desc)
+
+      interaction.reply({embeds: [embedShop], ephemeral: true})
+}
+
+function upgrades(user, interaction) {
+  let embedUp = new EmbedBuilder()
+      .setTitle(`Améliorations de ${user.displayName}`)
+      .setColor(colorshop)
+
+  interaction.reply({embeds: [embedUp], ephemeral: true})
+}
+
 function profil(user, interaction) {
   let embedProfil = new EmbedBuilder()
   .setTitle(`Profil de ${user.displayName}  ||  *Prestige ${user.prestige}* 💎`)
@@ -64,7 +96,7 @@ bot.on("ready", async () => {
 
   commands.create({
     name: "p",
-    description: "Affiche ton profil",
+    description: "Affiche le profil",
     options: [
       {
         name: "user",
@@ -74,13 +106,22 @@ bot.on("ready", async () => {
       }
     ]
   })
+
+  commands.create({
+    name: "shop",
+    description: "Ouvre l'interface de la boutique"
+  })
+
+  commands.create({
+    name: "up",
+    description: "Ouvre l'interface des améliorations"
+  })
 })
 
 bot.on('interactionCreate', async (interaction) => {
-  if(!interaction.isCommand()) {
+  if(!interaction.isCommand() && !interaction.isButton()) {
     return
   }
-
   const { commandName, options } = interaction
 
   if(commandName == "p") {
@@ -102,19 +143,131 @@ bot.on('interactionCreate', async (interaction) => {
     }
 
     if(user == undefined) {
-      interaction.reply("\u200b")
-      setTimeout(() => {
-        interaction.channel.send({embeds: [new EmbedBuilder()
-          .setDescription("Aucun profil associé avec ce compte.")
-          .setColor(colorRouge)]})
-      }, 500);
-      return
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription("Aucun profil associé avec ce compte.")
+        .setColor(colorRouge)]})
+        return
     }
-    
-    interaction.reply("\u200b")
-    setTimeout(() => {
-      interaction.channel.send({embeds: [profil(user, interaction)]})
-    }, 500);
+
+    if(interaction.options._hoistedOptions.length == 0) {
+      interaction.reply({
+        embeds: [
+          profil(user, interaction)
+        ],
+        components:[
+          new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+            .setCustomId(`shop-${interaction.user.id}`)
+            .setLabel('🛒 Boutique')
+            .setStyle('Secondary'),
+  
+            new ButtonBuilder()
+            .setCustomId(`upgrade-${interaction.user.id}`)
+            .setLabel('⬆️ Améliorations')
+            .setStyle('Secondary'),
+  
+            new ButtonBuilder()
+            .setCustomId('stats')
+            .setLabel('📊 Statistiques')
+            .setStyle('Secondary')
+          )
+        ]
+      }) 
+    }else{
+      interaction.reply({
+        embeds: [
+          profil(user, interaction)
+        ],
+        components:[
+          new ActionRowBuilder()
+          .addComponents(
+
+            new ButtonBuilder()
+            .setCustomId('stats')
+            .setLabel('📊 Statistiques')
+            .setStyle('Secondary')
+          )
+        ]
+      }) 
+    }
+  }
+
+  if(commandName == "shop") {
+    let user = listeProfiles.find(user => {
+      if(user.id == interaction.user.id) {
+        return true
+      }
+      return false
+    })
+
+    if(user == undefined) {
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription("Aucun profil associé avec ce compte.")
+        .setColor(colorRouge)],ephemeral: true})
+      return
+    }else{
+      shop(user, interaction)
+    }
+  }
+
+  if(commandName == "up") {
+    let user = listeProfiles.find(user => {
+      if(user.id == interaction.user.id) {
+        return true
+      }
+      return false
+    })
+
+    if(user == undefined) {
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription("Aucun profil associé avec ce compte.")
+        .setColor(colorRouge)],ephemeral: true})
+      return
+    }else{
+      upgrades(user, interaction)
+    }
+  }
+
+  if(interaction.isButton()) {
+    if(interaction.customId == "stats") { //stats
+      let user = listeProfiles.find(user => {
+        if(interaction.message.embeds[0].title.includes(user.displayName)) {
+          return true
+        }
+        return false
+      })
+
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setTitle(`Stats de ${user.displayName}`)
+        .setColor("#2168db")
+        .setThumbnail(bot.users.cache.get(user.id).avatarURL())
+      ], ephemeral: true})
+
+    }else if(interaction.customId.endsWith(interaction.user.id) && interaction.customId.startsWith("shop")) { //shop
+      let user = listeProfiles.find(user => {
+        if(interaction.message.embeds[0].title.includes(user.displayName)) {
+          return true
+        }
+        return false
+      })
+      shop(user, interaction)
+    }else if(interaction.customId.endsWith(interaction.user.id) && interaction.customId.startsWith("upgrade")) { //upgrades
+      let user = listeProfiles.find(user => {
+        if(interaction.message.embeds[0].title.includes(user.displayName)) {
+          return true
+        }
+        return false
+      })
+      upgrades(user, interaction)
+    }else{
+      if(interaction.customId.startsWith("shop")) {
+        return interaction.reply({content: "Tu ne peux pas voir la boutique des autres.", ephemeral: true})
+      }else if(interaction.customId.startsWith("upgrade")) {
+        return interaction.reply({content: "Tu ne peux pas voir les améliorations des autres.", ephemeral: true})
+      }
+
+    }
   }
 })
 
@@ -148,5 +301,13 @@ bot.on("messageCreate", async (message) => {
       if(err) throw err;})
   }
 })
+
+bot.on("guildMemberUpdate", (oldMember, newMember) => {
+  for (let i = 0; i < listeProfiles.length; i++) {
+    if(listeProfiles[i].displayName == oldMember.displayName) {
+      listeProfiles[i].displayName = newMember.displayName
+    }
+  }
+}) 
 
 bot.login(process.env.BOT_TOKEN)
