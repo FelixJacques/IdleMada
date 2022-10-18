@@ -5,7 +5,7 @@ class Profil {
     this.displayName = user.member.displayName
     this.online = true
     this.money = "64"
-    this.dispense = "0"
+    this.dispense = "F"
     this.totalMoney = "64"
     this.cps = "0"
     this.argentDonne = "0"
