@@ -6,7 +6,7 @@ class levi {
     this.cost = "186A0"
     this.farm = "levi"
     this.des = "Une Pizzaklown est une pizza un peu particulière. Il faut beaucoup d’années d'entraînement pour apprendre à la manger correctement."
-    this.img = "https://i.imgur.com/t7pLMas.png"
+    this.img = "https://i.imgur.com/Rn7YDNH.png"
   }
 }
 
