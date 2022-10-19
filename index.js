@@ -157,6 +157,14 @@ setInterval(() => {
       lasMsgProfil.edit({embeds: [updateProfil(lastProfil.prm)]})      
       go = 0
     }
+
+    Farm.prototype.getAll().forEach(farm => {
+      if((hexToInt(farm.cost) * 0.8 < hexToInt(profil.money)) && (profil[farm.farm].disco == false)) {
+        profil[farm.farm].disco = true
+        console.log(`Découvert ${farm.farm}`)
+      }
+    });
+
   })
 
   fs.writeFileSync('./data/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
@@ -457,7 +465,7 @@ bot.on('interactionCreate', async (interaction) => {
         break
     }
 
-    if(type == undefined) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setTitle("Objet Inconnu").setColor(colorRouge)]}).then(sent => {
+    if(type == undefined || user[type.farm].disco == false) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setTitle("Objet Inconnu").setColor(colorRouge)]}).then(sent => {
       setTimeout(() => {
         sent.delete()
       }, 3000);
