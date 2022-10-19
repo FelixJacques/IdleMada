@@ -1,13 +1,13 @@
-class pizza {
+class eater {
   
   constructor() {
-    this.name = "<:pizzaklown:822192070479446056> Pizzaklown"
+    this.name = "<:pizzaklown:822192070479446056> Z-eater"
     this.cps = "A"
     this.cost = "7530"
     this.farm = "eater"
-    this.des = "Une Pizzaklown est une pizza un peu particulière. Il faut beaucoup d’années d'entraînement pour apprendre à la manger correctement."
-    this.img = "https://i.imgur.com/t7pLMas.png"
+    this.des = "Le Z-eate, plus connu sous le nom de Zeklown, apprécie manger des fritures. "
+    this.img = "https://i.imgur.com/qNevYFQ.png"
   }
 }
 
-module.exports = pizza
+module.exports = eater
