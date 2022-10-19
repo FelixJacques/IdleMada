@@ -2,10 +2,10 @@ class shulker {
   
   constructor() {
     this.name = "🦊 Renard dans un Shulker"
-    this.cps = "493E0"
-    this.cost = "E8D4A51000"
+    this.cps = "7A120"
+    this.cost = "DA475ABF000"
     this.farm = "shulker"
-    this.des = "On ne sait pas pourquoi, mais mettre un renard dans une boîte à shulker apporte de l'argent."
+    this.des = "*Un petit renard curieux, un petit renard musclé, un petit renard ravagé, un petit renard bigleux, un petit renard malicieux, et un petit renard capricieux décident de rentrer tous ensemble dans un Shulker.*"
     this.img = "https://i.imgur.com/mtmPqtK.png"
   }
 }
