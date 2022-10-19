@@ -5,7 +5,7 @@ class health {
     this.cps = "2"
     this.cost = "FA"
     this.farm = "health"
-    this.des = "Les healthpack sont censés soigner les blessures, mais ceux si sont des versions légèrement modifiés qui vont à la place soigner votre portefeuille."
+    this.des = "*Les healthpacks sont censés soigner les blessures, mais ceux si sont des versions légèrement modifiés qui vont à la place soigner votre portefeuille.*"
     this.img = "https://i.imgur.com/xNNM0O4.png"
   }
 }
