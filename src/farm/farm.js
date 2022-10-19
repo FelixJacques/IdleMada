@@ -1,7 +1,8 @@
 const genji = require('./1genji')
 const health = require('./2health')
 const kana = require('./3kana')
-const pizza = require('./5eater')
+const gobelet = require('./4.gobelet')
+const eater = require('./5eater')
 const levi = require('./6levi')
 const bot = require('./7bot')
 const helico = require('./8helico')
@@ -10,15 +11,17 @@ const aykicat = require('./10aykicat')
 const bombe = require('./11bombe')
 const belugod = require('./12belugod')
 const widow = require('./13widow')
+const aimbot = require('./14aimbot')
 const nexus = require('./15nexus')
 const shulker = require('./16shulker')
 const academy = require('./23academy')
 
 
+
 class Farm{
 
   getAll(){
-    return [this.genji(), this.health(), this.kana(), this.pizza(), this.levi(), this.bot(), this.helico(), this.tatayeah(), this.aykicat(), this.bombe(), this.belugods(), this.widow(), this.nexus(),
+    return [this.genji(), this.health(), this.kana(), this.gobelet(), this.eater(), this.levi(), this.bot(), this.helico(), this.tatayeah(), this.aykicat(), this.bombe(), this.belugods(), this.widow(), this.nexus(),
     this.shulker(), this.academy()]
   }
 
@@ -34,8 +37,12 @@ class Farm{
     return new kana()
   }
 
-  pizza(){
-    return new pizza()
+  gobelet(){
+    return new gobelet()
+  }
+
+  eater(){
+    return new eater()
   }
 
   levi(){

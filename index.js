@@ -54,7 +54,7 @@ function shop(user, interaction) {
       for (let i = 0; i < listeFarm.length; i++) {
         farm = listeFarm[i]
         if(user[farm.farm].disco == true) {
-          desc += `**${farm.name}**\n\`${approx(hexToInt(farm.cost), approxOpts)}\` <:aykicash:1031462420025180160>\n`
+          desc += `**${farm.name}**\n\`${approx(hexToInt(farm.cost), approxOpts)}\` <:aykicash:1031518293456076800>\n`
         }
         if(user[listeFarm[i].farm].disco == false && user[listeFarm[i - 1].farm].disco == true) {
           desc += `*Débloqué prochainement*\n\`???\`\n`
@@ -66,9 +66,9 @@ function shop(user, interaction) {
       interaction.reply({embeds: [embedShop], ephemeral: true})
 }
 
-function upgrades(user, interaction) {
+function succes(user, interaction) {
   let embedUp = new EmbedBuilder()
-      .setTitle(`Améliorations de ${user.displayName}`)
+      .setTitle(`Succès de ${user.displayName} 🏆`)
       .setColor(colorshop)
 
   interaction.reply({embeds: [embedUp], ephemeral: true})
@@ -90,7 +90,7 @@ function updateProfil(profil) {
   .setTitle(`Profil de ${profil.displayName}  ||  *Prestige ${profil.prestige}* 💎`)
   .setThumbnail(`https://cdn.discordapp.com/avatars/${profil.id}/${lastProfil.dex.user.avatar}.png?size=256`)
   .addFields(
-    {name: `AykiCash <:aykicash:1031462420025180160> `, value: `\`${approx(hexToInt(profil.money), approxOpts)}\``},
+    {name: `AykiCash <:aykicash:1031518293456076800> `, value: `\`${approx(hexToInt(profil.money), approxOpts)}\``},
     {name: `Revenus 📈`, value: `\`+ ${approx(hexToInt(profil.cps), approxOpts)} / sec\``},
     {name: `Meilleur item ⭐`, value: `${lastItem}`}
   )
@@ -115,7 +115,7 @@ function profilCmd(user, interaction) {
   .setTitle(`Profil de ${user.displayName}  ||  *Prestige ${user.prestige}* 💎`)
   .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${interaction.options._hoistedOptions.length == 1 ? interaction.options._hoistedOptions[0].user.avatar : interaction.member.user.avatar}.png?size=256`)
   .addFields(
-    {name: `AykiCash <:aykicash:1031462420025180160> `, value: `\`${approx(hexToInt(user.money), approxOpts)}\``},
+    {name: `AykiCash <:aykicash:1031518293456076800> `, value: `\`${approx(hexToInt(user.money), approxOpts)}\``},
     {name: `Revenus 📈`, value: `\`+ ${approx(hexToInt(user.cps), approxOpts)} / sec\``},
     {name: `Meilleur item ⭐`, value: `${lastItem}`}
   )
@@ -128,7 +128,7 @@ setInterval(() => {
   go ++
   listeProfiles.forEach(profil => {
     let profit = parseFloat(((hexToInt(Farm.prototype.genji().cps) * profil.genji.multi) * profil.genji.number) + ((hexToInt(Farm.prototype.health().cps) * profil.health.multi) * profil.health.number) + ((hexToInt(Farm.prototype.kana().cps) * profil.kana.multi) * profil.kana.number)
-    + ((hexToInt(Farm.prototype.pizza().cps) * profil.eater.multi) * profil.eater.number) + ((hexToInt(Farm.prototype.levi().cps) * profil.levi.multi) * profil.levi.number) + ((hexToInt(Farm.prototype.bot().cps) * profil.bot.multi) * profil.bot.number) + ((hexToInt(Farm.prototype.helico().cps) * profil.helico.multi) * profil.helico.number)
+    + ((hexToInt(Farm.prototype.gobelet().cps) * profil.gobelet.multi) * profil.gobelet.number) + ((hexToInt(Farm.prototype.eater().cps) * profil.eater.multi) * profil.eater.number) + ((hexToInt(Farm.prototype.levi().cps) * profil.levi.multi) * profil.levi.number) + ((hexToInt(Farm.prototype.bot().cps) * profil.bot.multi) * profil.bot.number) + ((hexToInt(Farm.prototype.helico().cps) * profil.helico.multi) * profil.helico.number)
     + ((hexToInt(Farm.prototype.tatayeah().cps) * profil.tatayeah.multi) * profil.tatayeah.number) + ((hexToInt(Farm.prototype.aykicat().cps) * profil.aykicat.multi) * profil.aykicat.number) + ((hexToInt(Farm.prototype.bombe().cps) * profil.bombe.multi) * profil.bombe.number)
     + ((hexToInt(Farm.prototype.belugods().cps) * profil.belugod.multi) * profil.belugod.number) + ((hexToInt(Farm.prototype.widow().cps) * profil.widow.multi) * profil.widow.number) + ((hexToInt(Farm.prototype.nexus().cps) * profil.nexus.multi) * profil.nexus.number) + ((hexToInt(Farm.prototype.shulker().cps) * profil.shulker.multi) * profil.shulker.number)
     + ((hexToInt(Farm.prototype.academy().cps) * profil.academy.multi) * profil.academy.number)).toFixed(0)
@@ -140,7 +140,7 @@ setInterval(() => {
     profil.genji.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.genji().cps) * profil.genji.multi) * profil.genji.number) + BigInt(hexToInt(profil.genji.totalCash)))
     profil.health.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.health().cps) * profil.health.multi) * profil.health.number) + BigInt(hexToInt(profil.health.totalCash)))
     profil.kana.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.kana().cps) * profil.kana.multi) * profil.kana.number) + BigInt(hexToInt(profil.kana.totalCash)))
-    profil.eater.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.pizza().cps) * profil.eater.multi) * profil.eater.number) + BigInt(hexToInt(profil.eater.totalCash)))
+    profil.eater.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.eater().cps) * profil.eater.multi) * profil.eater.number) + BigInt(hexToInt(profil.eater.totalCash)))
     profil.levi.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.levi().cps) * profil.levi.multi) * profil.levi.number) + BigInt(hexToInt(profil.levi.totalCash)))
     profil.bot.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.bot().cps) * profil.bot.multi) * profil.bot.number) + BigInt(hexToInt(profil.bot.totalCash)))
     profil.helico.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.helico().cps) * profil.helico.multi) * profil.helico.number) + BigInt(hexToInt(profil.helico.totalCash)))
@@ -170,7 +170,7 @@ bot.on("ready", async () => {
   console.log("Bot Online")
   console.log(new Date().toLocaleString())
 
-  const guildId = "828485314304933931"
+  const guildId = "267769973709996032" //off 267769973709996032 //test 828485314304933931
   const guild = bot.guilds.cache.get(guildId)
   let commands
 
@@ -212,7 +212,7 @@ bot.on("ready", async () => {
     description: "Achète les objets de la boutique",
     options: [
       {
-        name: "object",
+        name: "objet",
         description: "Nom de l'object a acheter",
         required: true,
         type: Discord.ApplicationCommandOptionType.String
@@ -272,8 +272,8 @@ bot.on('interactionCreate', async (interaction) => {
             .setStyle('Secondary'),
   
             new ButtonBuilder()
-            .setCustomId(`upgrade-${interaction.user.id}`)
-            .setLabel('⬆️ Améliorations')
+            .setCustomId(`succes-${interaction.user.id}`)
+            .setLabel('🏆 Succès')
             .setStyle('Secondary'),
   
             new ButtonBuilder()
@@ -342,7 +342,7 @@ bot.on('interactionCreate', async (interaction) => {
         .setColor(colorRouge)],ephemeral: true})
       return
     }else{
-      upgrades(user, interaction)
+      succes(user, interaction)
     }
   }
 
@@ -388,6 +388,7 @@ bot.on('interactionCreate', async (interaction) => {
     switch (interaction.options._hoistedOptions[0].value.toLowerCase()) {
       case "genji":
       case "little":
+      case "little genji":
         type = Farm.prototype.genji()
         break;
       
@@ -401,7 +402,7 @@ bot.on('interactionCreate', async (interaction) => {
         break
 
       case "eater":
-        type = Farm.prototype.pizza()
+        type = Farm.prototype.eater()
         break
 
       case "levi":
@@ -456,12 +457,20 @@ bot.on('interactionCreate', async (interaction) => {
         break
     }
 
+    if(type == undefined) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setTitle("Objet Inconnu").setColor(colorRouge)]}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 3000);
+    })
+
     if(profilShop) {
       interaction.reply({embeds: [new EmbedBuilder()
         .setTitle(type.name)
         .setDescription(type.des)
         .addFields(
-          {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031462420025180160>`},
+          {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>`, inline: true},
+          {name: "CPS", value: `\`+${approx(type.cps, approxOpts)} /sec\``, inline: true},
+          {name: "Inventaire", value: `\`${user[type.farm].number}\``, inline: true}
         )
         .setImage(type.img)
         .setColor(colorshop)
@@ -487,7 +496,12 @@ bot.on('interactionCreate', async (interaction) => {
             new ButtonBuilder()
             .setCustomId(`max ${type.farm}`)
             .setLabel("Max")
-            .setStyle("Secondary")
+            .setStyle("Secondary"),
+
+            new ButtonBuilder()
+            .setCustomId("upgrades")
+            .setLabel("⬆️ Améliorations")
+            .setStyle("Success")
           )
       ],
       ephemeral: true})
@@ -510,15 +524,27 @@ bot.on('interactionCreate', async (interaction) => {
 
       let cost = Math.round(((prix * (1.15 ** (user[type.farm].number + parseInt(nombre)) - 1.15 ** user[type.farm].number)) / 0.15) * bonus)
 
-      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: true})    
+      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })    
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: true})
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
 
       user[type.farm].number += parseInt(nombre)
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`Tu as acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031462420025180160>`).setColor(colorVert).setImage(type.img)], ephemeral: true})
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 5000);
+      })
     }
   }
 
@@ -545,14 +571,14 @@ bot.on('interactionCreate', async (interaction) => {
         return false
       })
       shop(user, interaction)
-    }else if(interaction.customId.endsWith(interaction.user.id) && interaction.customId.startsWith("upgrade")) { //upgrades
+    }else if(interaction.customId.endsWith(interaction.user.id) && interaction.customId.startsWith("succes")) { //succes
       let user = listeProfiles.find(user => {
         if(interaction.message.embeds[0].title.includes(user.displayName)) {
           return true
         }
         return false
       })
-      upgrades(user, interaction)
+      succes(user, interaction)
     }else if(interaction.customId.split(" ")[0] == "+1") {
       let user = listeProfiles.find(user => {
         if(interaction.user.id == user.id) {
@@ -564,12 +590,20 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: true})
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
       user[type.farm].number += parseInt(1)
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`Tu as acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031462420025180160>`).setColor(colorVert).setImage(type.img)], ephemeral: true})
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 5000);
+      })
 
 
     }else if(interaction.customId.split(" ")[0] == "+10") {
@@ -583,12 +617,20 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(10)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: true})
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
       user[type.farm].number += parseInt(10)
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`Tu as acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031462420025180160>`).setColor(colorVert).setImage(type.img)], ephemeral: true})
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 5000);
+      })
 
 
     }else if(interaction.customId.split(" ")[0] == "+100") {
@@ -602,12 +644,20 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(100)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: true})
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
       user[type.farm].number += parseInt(100)
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`Tu as acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031462420025180160>`).setColor(colorVert).setImage(type.img)], ephemeral: true})
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 5000);
+      })
       
 
     }else if(interaction.customId.split(" ")[0] == "max") {
@@ -635,21 +685,37 @@ bot.on('interactionCreate', async (interaction) => {
 
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(nombre)) - 1.15 ** user[type.farm].number)) / 0.15) * bonus)
 
-      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: true})
+      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
 
       user[type.farm].number += parseInt(nombre)
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`Tu as acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031462420025180160>`).setColor(colorVert).setImage(type.img)], ephemeral: true})
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 5000);
+      })
     }
     
     
     else{
       if(interaction.customId.startsWith("shop")) {
-        return interaction.reply({content: "Tu ne peux pas voir la boutique des autres.", ephemeral: true})
-      }else if(interaction.customId.startsWith("upgrade")) {
-        return interaction.reply({content: "Tu ne peux pas voir les améliorations des autres.", ephemeral: true})
+        return interaction.reply({content: "Tu ne peux pas voir la boutique des autres.", ephemeral: true, fetchReply: true}).then(sent => {
+          setInterval(() => {
+            sent.delete()
+          }, 3000);
+        })
+      }else if(interaction.customId.startsWith("succes")) {
+        return interaction.reply({content: "Tu ne peux pas voir les succès des autres.", ephemeral: true, fetchReply: true}).then(sent => {
+          setInterval(() => {
+            sent.delete()
+          }, 3000);
+        })
       }
 
     }

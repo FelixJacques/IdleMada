@@ -15,7 +15,8 @@ class Profil {
     this.genji = {number: 0, disco: true, multi: 1, totalCash: "0"}
     this.health = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.kana = {number: 0, disco: false, multi: 1, totalCash: "0"}
-    this.pizza = {number: 0, disco: false, multi: 1, totalCash: "0"}
+    this.gobelet = {number: 0, disco: false, multi: 1, totalCash: "0"}
+    this.eater = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.levi = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.bot = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.helico = {number: 0, disco: false, multi: 1, totalCash: "0"}
