@@ -6,7 +6,7 @@ class belugod {
     this.cost = "2926F965"
     this.farm = "belugod"
     this.des = "Pour des raisons que l'on ne peut pas détailler ici, ce sponsor rapporte beaucoup d'argent."
-    this.img = "https://i.imgur.com/t7pLMas.png"
+    this.img = "https://i.imgur.com/3Or1dIp.png"
   }
 }
 
