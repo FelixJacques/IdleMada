@@ -5,7 +5,7 @@ class genji {
     this.cps = "1"
     this.cost = "64"
     this.farm = "genji"
-    this.des = "Mascotte du discord, la présence d'un Little Genji génère lentement mais surement un peu d'aykicash à son possesseur."
+    this.des = "*Mascotte du discord, la présence d'un Little Genji génère de l'aykicash, lentement mais surement.*"
     this.img = "https://i.imgur.com/FZlBwEb.png"
   }
 }
