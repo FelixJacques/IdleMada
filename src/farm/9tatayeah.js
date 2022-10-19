@@ -6,7 +6,7 @@ class tatayeah {
     this.cost = "4C4B40"
     this.farm = "tatayeah"
     this.des = "TATAYEAAAAAAAAAAAAAAAH"
-    this.img = "https://i.imgur.com/t7pLMas.png"
+    this.img = "https://i.imgur.com/WoaZAgR.png"
   }
 }
 
