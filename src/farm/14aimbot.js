@@ -2,10 +2,10 @@ class aimbot {
   
   constructor() {
     this.name = "<:HitMark:307938386533023744> L'aimbot de Livs"
-    this.cps = "88B8"
-    this.cost = "218711A00"
+    this.cps = "13880"
+    this.cost = "3A35294400"
     this.farm = "aimbot"
-    this.des = "On sait pas comment il fait pour miss autant de shots. Toujours est-il qu'il mangera toutes vos grav même avec widow."
+    this.des = "*Un outil très pratique pour mieux viser. On devrait le prêter à Tak.*"
     this.img = "https://i.imgur.com/oJEJANj.png"
   }
 }
