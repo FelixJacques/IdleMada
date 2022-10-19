@@ -6,7 +6,7 @@ class aykicat {
     this.cost = "1C9C380"
     this.farm = "aykicat"
     this.des = "Aykicat est tellement mignonne qu'elle vous apporte de l'argent rien qu'en vous regardant."
-    this.img = "https://i.imgur.com/t7pLMas.png"
+    this.img = "https://i.imgur.com/YYS7TaR.png"
   }
 }
 
