@@ -6,7 +6,7 @@ class nexus {
     this.cost = "104C533C00"
     this.farm = "nexus"
     this.des = "Construction légendaire érigée par les ancêtres Pingoo, ce monument historique de Madacraft impressionne tous les historiens de part sa beauté mais aussi sa complexité."
-    this.img = ""
+    this.img = "https://i.imgur.com/t7pLMas.png"
   }
 }
 

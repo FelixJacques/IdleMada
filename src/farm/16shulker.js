@@ -6,7 +6,7 @@ class shulker {
     this.cost = "E8D4A51000"
     this.farm = "shulker"
     this.des = "On ne sait pas pourquoi, mais mettre un renard dans une boîte à shulker apporte de l'argent."
-    this.img = ""
+    this.img = "https://i.imgur.com/t7pLMas.png"
   }
 }
 
