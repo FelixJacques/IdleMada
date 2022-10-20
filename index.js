@@ -197,6 +197,19 @@ bot.on("ready", async () => {
   })
 
   commands.create({
+    name: "item",
+    description: "Ouvre l'interface d'un objet",
+    options : [
+      {
+        name: "objet",
+        description: "Nom de l'object a afficher",
+        required: true,
+        type: Discord.ApplicationCommandOptionType.String
+      }
+    ]
+  })
+
+  commands.create({
     name: "shop",
     description: "Ouvre l'interface de la boutique"
   })
@@ -357,6 +370,132 @@ bot.on('interactionCreate', async (interaction) => {
     }
   }
 
+  if(commandName == "item") {
+    switch (interaction.options._hoistedOptions[0].value.toLowerCase()) {
+      case "genji":
+      case "little":
+      case "little genji":
+        type = Farm.prototype.genji()
+        break;
+      
+      case "health":
+      case "pack":
+      case "heal":
+        type = Farm.prototype.health()
+        break
+
+      case "kana":
+      case "kanasheah":
+        type = Farm.prototype.kana()
+        break
+
+      case "eater":
+        type = Farm.prototype.eater()
+        break
+
+      case "levi":
+      case "smol":
+        type = Farm.prototype.levi()
+        break
+
+      case "bot":
+      case "overstats":
+        type = Farm.prototype.bot()
+        break
+
+      case "helico":
+      case "pandoux":
+        type = Farm.prototype.helico()
+        break
+
+      case "tatayeah":
+      case "souris":
+        type = Farm.prototype.tatayeah()
+        break
+
+      case "aykicat":
+        type = Farm.prototype.aykicat()
+        break
+
+      case "bombe":
+      case "hiesco":
+        type = Farm.prototype.bombe()
+        break
+
+      case "belugods":
+        type = Farm.prototype.belugods()
+        break
+
+      case "widow":
+      case "tak":
+        type = Farm.prototype.widow()
+        break
+
+      case "nexus":
+        type = Farm.prototype.nexus()
+        break
+      
+      case "shulker":
+        type = Farm.prototype.shulker()
+        break
+
+      case "academy":
+      case "mada":
+        type = Farm.prototype.academy()
+        break
+    }
+    if(type == undefined || user[type.farm].disco == false) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Object Inconnu").setColor(colorRouge)], fetchReply: true}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 3000);
+    })    
+
+    
+
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setTitle(type.name)
+        .setDescription(type.des)
+        .addFields(
+          {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>`, inline: true},
+          {name: "CPS", value: `\`+${approx(type.cps, approxOpts)} /sec\``, inline: true},
+          {name: "Inventaire", value: `\`${user[type.farm].number}\``, inline: true}
+        )
+        .setImage(type.img)
+        .setColor(colorshop)
+      ],
+      components: [
+        new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+            .setCustomId(`+1 ${type.farm}`)
+            .setLabel("+1")
+            .setStyle("Secondary"),
+
+            new ButtonBuilder()
+            .setCustomId(`+10 ${type.farm}`)
+            .setLabel("+10")
+            .setStyle("Secondary"),
+
+            new ButtonBuilder()
+            .setCustomId(`+100 ${type.farm}`)
+            .setLabel("+100")
+            .setStyle("Secondary"),
+
+            new ButtonBuilder()
+            .setCustomId(`max ${type.farm}`)
+            .setLabel("Max")
+            .setStyle("Secondary"),
+
+            new ButtonBuilder()
+            .setCustomId("upgrades")
+            .setLabel("⬆️ Améliorations")
+            .setStyle("Success")
+          )
+      ],
+      ephemeral: true})
+    
+  }
+
   if(commandName == "buy") {
     let user = listeProfiles.find(user => {
       if(user.id == interaction.user.id) {
@@ -381,7 +520,7 @@ bot.on('interactionCreate', async (interaction) => {
     let type = undefined
 
     if(interaction.options._hoistedOptions.length < 2) {
-      profilShop = true
+      nombre = 1
     }else if(interaction.options._hoistedOptions[1].name == "nombre") {
       if(interaction.options._hoistedOptions[1].value <= 0 || interaction.options._hoistedOptions[1].value > 1000) {
 
@@ -488,51 +627,6 @@ bot.on('interactionCreate', async (interaction) => {
       }, 3000);
     })
 
-    if(profilShop) {
-      interaction.reply({embeds: [new EmbedBuilder()
-        .setTitle(type.name)
-        .setDescription(type.des)
-        .addFields(
-          {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>`, inline: true},
-          {name: "CPS", value: `\`+${approx(type.cps, approxOpts)} /sec\``, inline: true},
-          {name: "Inventaire", value: `\`${user[type.farm].number}\``, inline: true}
-        )
-        .setImage(type.img)
-        .setColor(colorshop)
-      ],
-      components: [
-        new ActionRowBuilder()
-          .addComponents(
-            new ButtonBuilder()
-            .setCustomId(`+1 ${type.farm}`)
-            .setLabel("+1")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`+10 ${type.farm}`)
-            .setLabel("+10")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`+100 ${type.farm}`)
-            .setLabel("+100")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`max ${type.farm}`)
-            .setLabel("Max")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId("upgrades")
-            .setLabel("⬆️ Améliorations")
-            .setStyle("Success")
-          )
-      ],
-      ephemeral: true})
-    }else{
-      if(type == undefined) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Object Inconnu").setColor(colorRouge)], ephemeral: true})
-
       let prix = hexToInt(type.cost)
       let bonus = 1
       if(max == true) {
@@ -570,7 +664,6 @@ bot.on('interactionCreate', async (interaction) => {
           sent.delete()
         }, 5000);
       })
-    }
   }
 
   if(interaction.isButton()) {
