@@ -1,7 +1,7 @@
 class illeria {
   
   constructor() {
-    this.name = "<:leviator:1032506121514131527> Farm à guardian d'Illeria"
+    this.name = ":factory: Farm à guardian d'Illeria"
     this.cps = "2DC6C0"
     this.cost = "38D7EA4C68000"
     this.farm = "illeria"
