@@ -4,6 +4,7 @@ class Profil {
     this.id = user.member.id
     this.displayName = user.member.displayName
     this.online = true
+    this.avatar = user.member.user.avatarURL()
     this.money = "64"
     this.dispense = "0"
     this.totalMoney = "64"

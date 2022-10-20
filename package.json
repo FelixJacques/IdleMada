@@ -20,6 +20,7 @@
     "approximate-number": "^2.1.0",
     "discord.js": "^14.6.0",
     "fs": "*",
+    "luxon": "^3.0.4",
     "string-progressbar": "^1.0.4"
   }
 }

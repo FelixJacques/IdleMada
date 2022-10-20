@@ -4,11 +4,24 @@ const Profil = require('./src/profil')
 const Farm = require('./src/farm/farm')
 const {EmbedBuilder, ActionRowBuilder, ButtonBuilder} = require('discord.js')
 const fs = require("fs")
+const { DateTime } = require("luxon")
+const achiv = require('./src/succes')
 const progressbar = require('string-progressbar');
 var approx = require('approximate-number');
 
 require("dotenv").config()
 
+console.log(DateTime.now().setZone('CET').hour)
+
+let test = true
+if(test == true) {
+  var guildId = "828485314304933931"
+  var channelId = "828518673244618752"
+}else{
+  var guildId = "267769973709996032"
+  var channelId = ""
+}
+let acheteursKana = []
 let prefix = "$"
 let listeProfiles = []
 let colorRouge = "#ED4245"
@@ -165,11 +178,41 @@ setInterval(() => {
     if(err) throw err;})
 }, 1000);
 
+setInterval(() => {
+  for (let i = 0; i < listeProfiles.length; i++) {
+    achiv(listeProfiles[i]).forEach(ach => {
+      if(ach.cond == true && !listeProfiles[i].achivementsId.includes(ach.id)) {
+        listeProfiles[i].achivementsId.push(ach.id)
+
+        bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
+          .setDescription(`**► __${ach.name}__ ◄**\n\n + 2 Points de succès`)
+          .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
+          .setColor(colorgold)
+          .setAuthor({iconURL: listeProfiles[i].avatar, name: `${listeProfiles[i].displayName} a débloqué un succès`})]})
+      }
+    })
+
+    for (let i = 0; i < acheteursKana.length; i++) {
+      if(DateTime.now().setZone("CET").hour == 4 && DateTime.now().setZone("CET").minute >= 0 && DateTime.now().setZone("CET").minute <= 20) {
+        if(!acheteursKana[i].achivementsId.includes(12)) {
+          listeProfiles[i].achivementsId.push(12)
+  
+          bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
+            .setDescription(`**► __Kana Time__ ◄**\n\n + 2 Points de succès`)
+            .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
+            .setColor(colorgold)
+            .setAuthor({iconURL: listeProfiles[i].avatar, name: `${listeProfiles[i].displayName} a débloqué un succès`})]})
+        }
+      }
+      acheteursKana = []
+    }
+  }
+}, 5000);
+
 bot.on("ready", async () => {
   console.log("Bot Online")
   console.log(new Date().toLocaleString())
 
-  const guildId = "267769973709996032" //off 267769973709996032 //test 828485314304933931
   const guild = bot.guilds.cache.get(guildId)
   let commands
 
@@ -179,11 +222,11 @@ bot.on("ready", async () => {
     commands = bot.application.commands
   }
 
-  /*guild.commands.fetch("1032024144486867035").then(command => {
+  /*guild.commands.fetch("1032172194454839306").then(command => {
     command.delete()
   })*/
 
-  let test = commands.create({
+  commands.create({
     name: "p",
     description: "Affiche le profil",
     options: [
@@ -217,6 +260,19 @@ bot.on("ready", async () => {
   commands.create({
     name: "up",
     description: "Ouvre l'interface des améliorations"
+  })
+
+  commands.create({
+    name: "claim",
+    description: "Entrez un code secret",
+    options: [
+      {
+        name: "code",
+        description: "pensez vous avoir déchiffré une énigme ?",
+        required: true,
+        type: Discord.ApplicationCommandOptionType.String
+      }
+    ]
   })
 
   commands.create({
@@ -326,6 +382,30 @@ bot.on('interactionCreate', async (interaction) => {
     }
   }
 
+  if(commandName == "claim") {
+    let user = listeProfiles.find(user => {
+      if(user.id == interaction.user.id) {
+        return true
+      }
+      return false
+    })
+
+    if(user == undefined) {
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription("Aucun profil associé avec ce compte.")
+        .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })    
+      return
+    }
+
+    if(interaction.options._hoistedOptions[0].value == "PCL41MTH1SP") {
+      
+    }
+  }
+
   if(commandName == "shop") {
     let user = listeProfiles.find(user => {
       if(user.id == interaction.user.id) {
@@ -371,6 +451,24 @@ bot.on('interactionCreate', async (interaction) => {
   }
 
   if(commandName == "item") {
+    let user = listeProfiles.find(user => {
+      if(user.id == interaction.user.id) {
+        return true
+      }
+      return false
+    })
+
+    if(user == undefined) {
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription("Aucun profil associé avec ce compte.")
+        .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })    
+      return
+    }
+
     switch (interaction.options._hoistedOptions[0].value.toLowerCase()) {
       case "genji":
       case "little":
@@ -450,50 +548,47 @@ bot.on('interactionCreate', async (interaction) => {
       }, 3000);
     })    
 
-    
+    interaction.reply({embeds: [new EmbedBuilder()
+      .setTitle(type.name)
+      .setDescription(type.des)
+      .addFields(
+        {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>`, inline: true},
+        {name: "CPS", value: `\`+${approx(type.cps, approxOpts)} /sec\``, inline: true},
+        {name: "Inventaire", value: `\`${user[type.farm].number}\``, inline: true}
+      )
+      .setImage(type.img)
+      .setColor(colorshop)
+    ],
+    components: [
+      new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+          .setCustomId(`+1 ${type.farm}`)
+          .setLabel("+1")
+          .setStyle("Secondary"),
 
-      interaction.reply({embeds: [new EmbedBuilder()
-        .setTitle(type.name)
-        .setDescription(type.des)
-        .addFields(
-          {name: "Prix unitaire", value: `\`${approx(Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>`, inline: true},
-          {name: "CPS", value: `\`+${approx(type.cps, approxOpts)} /sec\``, inline: true},
-          {name: "Inventaire", value: `\`${user[type.farm].number}\``, inline: true}
+          new ButtonBuilder()
+          .setCustomId(`+10 ${type.farm}`)
+          .setLabel("+10")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`+100 ${type.farm}`)
+          .setLabel("+100")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`max ${type.farm}`)
+          .setLabel("Max")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId("upgrades")
+          .setLabel("⬆️ Améliorations")
+          .setStyle("Success")
         )
-        .setImage(type.img)
-        .setColor(colorshop)
-      ],
-      components: [
-        new ActionRowBuilder()
-          .addComponents(
-            new ButtonBuilder()
-            .setCustomId(`+1 ${type.farm}`)
-            .setLabel("+1")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`+10 ${type.farm}`)
-            .setLabel("+10")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`+100 ${type.farm}`)
-            .setLabel("+100")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId(`max ${type.farm}`)
-            .setLabel("Max")
-            .setStyle("Secondary"),
-
-            new ButtonBuilder()
-            .setCustomId("upgrades")
-            .setLabel("⬆️ Améliorations")
-            .setStyle("Success")
-          )
-      ],
-      ephemeral: true})
-    
+    ],
+    ephemeral: true})
   }
 
   if(commandName == "buy") {
@@ -514,7 +609,7 @@ bot.on('interactionCreate', async (interaction) => {
         })    
       return
     }
-    let profilShop = false
+
     let nombre = 0
     let max = false
     let type = undefined
@@ -659,6 +754,10 @@ bot.on('interactionCreate', async (interaction) => {
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
+      if(type.farm == "kana") {
+        acheteursKana.push(user)
+      }
+
       interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
@@ -748,6 +847,10 @@ bot.on('interactionCreate', async (interaction) => {
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
+      if(type.farm == "kana") {
+        acheteursKana.push(user)
+      }
+
       interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
@@ -775,7 +878,11 @@ bot.on('interactionCreate', async (interaction) => {
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(type.farm == "kana") {
+        acheteursKana.push(user)
+      }
+
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **10 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 5000);
@@ -802,7 +909,11 @@ bot.on('interactionCreate', async (interaction) => {
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
-      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **1 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(type.farm == "kana") {
+        acheteursKana.push(user)
+      }
+
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **100 ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 5000);
@@ -844,6 +955,10 @@ bot.on('interactionCreate', async (interaction) => {
       user.money = intToHex(hexToInt(user.money) - cost)
       user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
 
+      if(type.farm == "kana") {
+        acheteursKana.push(user)
+      }
+
       interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> a acheté **${nombre} ${type.name}** pour **${approx(cost, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setImage(type.img)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
@@ -854,14 +969,14 @@ bot.on('interactionCreate', async (interaction) => {
     
     else{
       if(interaction.customId.startsWith("shop")) {
-        return interaction.reply({content: "Tu ne peux pas voir la boutique des autres.", ephemeral: true, fetchReply: true}).then(sent => {
-          setInterval(() => {
+        return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu ne peux pas voir la boutique des autres.").setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
             sent.delete()
           }, 3000);
         })
       }else if(interaction.customId.startsWith("succes")) {
-        return interaction.reply({content: "Tu ne peux pas voir les succès des autres.", ephemeral: true, fetchReply: true}).then(sent => {
-          setInterval(() => {
+        return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu ne peux pas voir les succès des autres.").setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
             sent.delete()
           }, 3000);
         })
@@ -893,7 +1008,7 @@ bot.on("messageCreate", async (message) => {
         return
       }
     }
-    
+
     message.react("👍")
     listeProfiles.push(new Profil(message))
     console.log(listeProfiles)
