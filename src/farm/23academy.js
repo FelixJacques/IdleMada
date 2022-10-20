@@ -2,10 +2,10 @@ class academy {
   
   constructor() {
     this.name = "🏫 Mada Academy"
-    this.cps = "F4240"
-    this.cost = "CBBA106E000"
+    this.cps = "23C34600"
+    this.cost = "2B5E3AF16B1880000"
     this.farm = "academy"
-    this.des = "Auto proclamée meilleure structure Overwatch de France, elle vous rapportera une quantité hallucinante d'argent, malgré que ce soit selon les perfs des joueurs..."
+    this.des = "Auto proclamée meilleure structure e-sport Overwatch de France."
     this.img = "https://i.imgur.com/61JMGtv.png"
   }
 }
