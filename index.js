@@ -1087,49 +1087,179 @@ bot.on('interactionCreate', async (interaction) => {
       case "overstats":
       case "bot overstats":
 
-
         type = Farm.prototype.bot()
         break
 
       case "helico":
       case "pandoux":
+      case "helico de pandoux" :
+      case "l'helico de pandoux" :
+      case "helico pandoux" :
+
         type = Farm.prototype.helico()
         break
 
       case "tatayeah":
       case "souris":
+      case "tatayeet" :
+      case "souris de tatayeah" :
+      case "tatayet" :  
+      case "souris de tatayet" :    
+      case "la souris de tatayet" :
+      case "la souris de tatayeah" :
+      case "la souris de tatayeet" :
+      case "souris de tatayeet" :
+
         type = Farm.prototype.tatayeah()
         break
 
       case "aykicat":
+      case "aykikat":
+      case "cat":
         type = Farm.prototype.aykicat()
         break
 
       case "bombe":
       case "hiesko":
+      case "bombe d'hiesko":
+      case "la bombe d'hiesko" :
+      case "la bombe" :   
+      case "heisko" :
+      case "la bombe de hiesko" : 
+      case "bombe de hiesko" :
+      case "la bombe d hiesko" : 
+      case "bombe d hiesko" : 
+
         type = Farm.prototype.bombe()
         break
 
       case "belugods":
+      case "belugod" : 
+      case "sponsor" : 
+      case "sponsor belugods" : 
+      case "sponsor belugod" : 
+      case "belu" : 
+
         type = Farm.prototype.belugods()
         break
 
       case "widow":
       case "tak":
+      case "widow de tak" :
+      case "takmany" :
+      case "la widow de tak" :
+      case "la widow de takmany" :
+      case "widow de takmany" :
+
         type = Farm.prototype.widow()
         break
 
+      case "l'aimbot de livs" :
+      case "aimbot de livs" :
+      case "aimbot" :
+      case "livs" :
+      case "l aimbot de livs" :
+        type = Farm.prototype.aimbot()
+        break
+
+
       case "nexus":
+      case "nexsus":
         type = Farm.prototype.nexus()
         break
       
       case "shulker":
+      case "shulker fox":
+      case "renard":
+      case "renard dans un shulker":
+      case "shulker box":
+      case "fox":
         type = Farm.prototype.shulker()
         break
 
+      case "la carte legendaire leviator":
+      case "carte legendaire leviator":
+      case "carte légendaire léviator":
+      case "la carte":
+      case "leviator":
+      case "léviator":
+      case "la carte legendaire":
+      case "la carte légendaire":
+      case "la carte légendaire léviator":
+      case "carte" :
+
+        type = Farm.prototype.leviator()
+        break
+
+      case "la farm à guardian d'illeria":
+      case "farm à guardian d'illeria":
+      case "farm à guardian d illeria":
+      case "la farm à guardian d illeria":
+      case "farm":
+      case "guardian":
+      case "illeria":
+      case "la farm à guardian":
+      case "farm à guardian":
+      case "farm a guardian":
+      case "la farm a guardian d'illeria":
+      case "farm a guardian d'illeria":
+
+        type = Farm.prototype.guardian()
+        break
+      
+      case "gongo the bongo":
+      case "gongo":
+      case "bongo":
+      case "gongo bongo":
+        type = Farm.prototype.bongo()
+        break
+
+      case "les lacs suspendus de pandoutayah":
+      case "pandoutayah":
+      case "lac":
+      case "lacs":
+      case "lacs suspendus":
+      case "lacs suspendus de pandoutayah":
+      case "les lacs":
+        type = Farm.prototype.cite()
+        break
+
+      case "casino pokemon" :
+      case "casino":
+      case "pokemon":
+      case "le casino":
+      case "le casino pokemon":
+        type = Farm.prototype.casino
+        break
+
+      case "mada academy":
       case "academy":
       case "mada":
+      case "la mada academy":
         type = Farm.prototype.academy()
+        break
+
+      case "papa genji":
+      case "aykira":
+      case "papa":
+
+        type = Farm.prototype.papa()
+        break
+
+      case "pass vip madamada" :
+      case "pass":
+      case "vip":
+
+        type = Farm.prototype.vip()
+        break
+
+      case "fragment de matiere condensée" :
+      case "fragment":
+      case "fragment de matière":
+      case "fragment de matiere":
+      case "fragment de matiere condensee":
+      case "fragment de matière condensee":
+        type = Farm.prototype.fragment()
         break
     }
     if(type == undefined || user[type.farm].disco == false) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Object Inconnu").setColor(colorRouge)], fetchReply: true}).then(sent => {
@@ -1242,66 +1372,235 @@ bot.on('interactionCreate', async (interaction) => {
       case "health":
       case "pack":
       case "heal":
+      case "healthpack":
+      case "healpack":
         type = Farm.prototype.health()
         break
 
       case "kana":
-      case "kanasheah":
+      case "kanasheeesh":
+      case "kanasheesh":
+      case "kanashesh":
+      case "sheeesh" :
+      case "sheesh" :
+      case "shesh" :
+      
         type = Farm.prototype.kana()
         break
 
+      case "gobelet" :
+      case "goblet" :
+      case "pappusu" :
+      case "papusu" :
+      case "gobelet de pappusu" :
+      case "goblet de pappusu" :
+      case "gobelet papusu" :
+      case "gobelet pappusu" :
+      
+
+      type = Farm.prototype.gobelet()
+      break
+
       case "eater":
+      case "z":
+      case "zeater":
+      case "z-eater":
+      case "zeklown" :
+
         type = Farm.prototype.eater()
         break
+      
 
       case "levi":
       case "smol":
+      case "smol levi":
+      case "livai" :
+      case "smol livai" :
+      case "rivaille" :    
+      case "smol rivaille" :  
+      case "levai" :  
+      case "smol levai" :  
+
         type = Farm.prototype.levi()
-        break
-      case "tatayeah":
-      case "souris":
-        type = Farm.prototype.tatayeah()
-        break
-
-      case "aykicat":
-        type = Farm.prototype.aykicat()
-        break
-
-      case "bombe":
-      case "hiesco":
-        type = Farm.prototype.bombe()
-        break
-
-      case "belugods":
-        type = Farm.prototype.belugods()
-        break
-
-      case "widow":
-      case "tak":
-        type = Farm.prototype.widow()
-        break
-
-      case "nexus":
-        type = Farm.prototype.nexus()
-        break
-      
-      case "shulker":
-        type = Farm.prototype.shulker()
-        break
-
-      case "academy":
-      case "mada":
-        type = Farm.prototype.academy()
         break
 
       case "bot":
       case "overstats":
+      case "bot overstats":
+
         type = Farm.prototype.bot()
         break
 
       case "helico":
       case "pandoux":
+      case "helico de pandoux" :
+      case "l'helico de pandoux" :
+      case "helico pandoux" :
+
         type = Farm.prototype.helico()
+        break
+
+      case "tatayeah":
+      case "souris":
+      case "tatayeet" :
+      case "souris de tatayeah" :
+      case "tatayet" :  
+      case "souris de tatayet" :    
+      case "la souris de tatayet" :
+      case "la souris de tatayeah" :
+      case "la souris de tatayeet" :
+      case "souris de tatayeet" :
+
+        type = Farm.prototype.tatayeah()
+        break
+
+      case "aykicat":
+      case "aykikat":
+      case "cat":
+        type = Farm.prototype.aykicat()
+        break
+
+      case "bombe":
+      case "hiesko":
+      case "bombe d'hiesko":
+      case "la bombe d'hiesko" :
+      case "la bombe" :   
+      case "heisko" :
+      case "la bombe de hiesko" : 
+      case "bombe de hiesko" :
+      case "la bombe d hiesko" : 
+      case "bombe d hiesko" : 
+
+        type = Farm.prototype.bombe()
+        break
+
+      case "belugods":
+      case "belugod" : 
+      case "sponsor" : 
+      case "sponsor belugods" : 
+      case "sponsor belugod" : 
+      case "belu" : 
+
+        type = Farm.prototype.belugods()
+        break
+
+      case "widow":
+      case "tak":
+      case "widow de tak" :
+      case "takmany" :
+      case "la widow de tak" :
+      case "la widow de takmany" :
+      case "widow de takmany" :
+
+        type = Farm.prototype.widow()
+        break
+
+      case "l'aimbot de livs" :
+      case "aimbot de livs" :
+      case "aimbot" :
+      case "livs" :
+      case "l aimbot de livs" :
+        type = Farm.prototype.aimbot()
+        break
+
+
+      case "nexus":
+      case "nexsus":
+        type = Farm.prototype.nexus()
+        break
+      
+      case "shulker":
+      case "shulker fox":
+      case "renard":
+      case "renard dans un shulker":
+      case "shulker box":
+      case "fox":
+        type = Farm.prototype.shulker()
+        break
+
+      case "la carte legendaire leviator":
+      case "carte legendaire leviator":
+      case "carte légendaire léviator":
+      case "la carte":
+      case "leviator":
+      case "léviator":
+      case "la carte legendaire":
+      case "la carte légendaire":
+      case "la carte légendaire léviator":
+      case "carte" :
+
+        type = Farm.prototype.leviator()
+        break
+
+      case "la farm à guardian d'illeria":
+      case "farm à guardian d'illeria":
+      case "farm à guardian d illeria":
+      case "la farm à guardian d illeria":
+      case "farm":
+      case "guardian":
+      case "illeria":
+      case "la farm à guardian":
+      case "farm à guardian":
+      case "farm a guardian":
+      case "la farm a guardian d'illeria":
+      case "farm a guardian d'illeria":
+
+        type = Farm.prototype.guardian()
+        break
+      
+      case "gongo the bongo":
+      case "gongo":
+      case "bongo":
+      case "gongo bongo":
+        type = Farm.prototype.bongo()
+        break
+
+      case "les lacs suspendus de pandoutayah":
+      case "pandoutayah":
+      case "lac":
+      case "lacs":
+      case "lacs suspendus":
+      case "lacs suspendus de pandoutayah":
+      case "les lacs":
+        type = Farm.prototype.cite()
+        break
+
+      case "casino pokemon" :
+      case "casino":
+      case "pokemon":
+      case "le casino":
+      case "le casino pokemon":
+        type = Farm.prototype.casino
+        break
+
+      case "mada academy":
+      case "academy":
+      case "mada":
+      case "la mada academy":
+        type = Farm.prototype.academy()
+        break
+
+      case "papa genji":
+      case "aykira":
+      case "papa":
+
+        type = Farm.prototype.papa()
+        break
+
+      case "pass vip madamada" :
+      case "pass":
+      case "vip":
+
+        type = Farm.prototype.vip()
+        break
+
+      case "fragment de matiere condensée" :
+      case "fragment":
+      case "fragment de matière":
+      case "fragment de matiere":
+      case "fragment de matiere condensee":
+      case "fragment de matière condensee":
+        type = Farm.prototype.fragment()
         break
     }
 
