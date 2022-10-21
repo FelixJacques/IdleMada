@@ -13,6 +13,10 @@ class Profil {
     this.upgradeId = []
     this.achivementsId = []
     this.succScore = 0
+    this.totalItem = 0
+    this.lucioThug = 0
+    this.lucioGold = 0
+    this.lucioRGB = 0
     this.genji = {number: 0, disco: true, multi: 1, totalCash: "0"}
     this.health = {number: 0, disco: false, multi: 1, totalCash: "0"}
     this.kana = {number: 0, disco: false, multi: 1, totalCash: "0"}

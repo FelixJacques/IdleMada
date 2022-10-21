@@ -80,7 +80,7 @@ function shop(user, interaction) {
       interaction.reply({embeds: [embedShop], ephemeral: true})
 }
 
-function succes(user, interaction) {
+function succes(user, interaction, userDem) {
 
   let page1 = new EmbedBuilder()
   .setTitle(`Succès de ${user.displayName}`)
@@ -88,10 +88,40 @@ function succes(user, interaction) {
   .setThumbnail(user.avatar)
   .setDescription(`Obtenus: \`${user.achivementsId.length} / ${achiv(user).length + 20}\`\n\nScore: \`${user.succScore}\``)
 
+  let listeAchGen = []
   let listeAch = []
   achiv(user).forEach(ach => {
-    if(user[ach.farm].disco == true) {
-      listeAch.push(ach)
+    if(ach.farm == null) {
+      listeAchGen.push(ach)
+    }else if(ach.name == "Kana Time") {
+      if(userDem == undefined) {
+        if(user[ach.farm].disco == true) {
+          listeAch.push(ach)
+        }
+      }else{
+
+        if(userDem[ach.farm].disco == true && user[ach.farm].disco == true) {
+          listeAch.push(ach)
+        }
+      }
+    }else if(ach.name == "C’est l’heure de manger !") {
+      if(userDem == undefined) {
+        if(userDem[ach.farm].disco == true && user[ach.farm].disco == true) {
+          listeAch.push(ach)
+        }
+      }else{
+        if(userDem[ach.farm].disco == true) {
+          listeAch.push(ach)
+        }
+      }
+    }else if(user[ach.farm].disco == true) {
+      if(userDem != undefined) {
+        if(userDem[ach.farm].disco == true) {
+          listeAch.push(ach)
+        }
+      }else{
+        listeAch.push(ach)
+      }
     }
   });
   let desc = ""
@@ -120,10 +150,18 @@ function succes(user, interaction) {
   let has = false
   let descr = ""
   for (let a = 0; a < specialAchId.length; a++) {
-
+    has = false
     if(user[specialAchId[a].type].disco == true) {
-      if(user.achivementsId.includes(specialAchId[a].id)) {
-        has = true
+      if(userDem != undefined) {
+        if(userDem[specialAchId[a].type].disco == true) {
+          if(user.achivementsId.includes(specialAchId[a].id)) {
+            has = true
+          }
+        }
+      }else{
+        if(user.achivementsId.includes(specialAchId[a].id)) {
+          has = true
+        }
       }
       switch (specialAchId[a].type) {
         case "gobelet":
@@ -287,15 +325,27 @@ function succes(user, interaction) {
     .setThumbnail(user.avatar)
     .setDescription(descr))
   }
+  let descGen = ""
+  listeAchGen.forEach(ach => {
+    if(user.achivementsId.includes(ach.id)) {
+      descGen += `✅ **__${ach.name}__** (+${ach.score})\n||*${ach.desc}*||\n\n`
+    }else{
+      descGen += `🔒 __${ach.name}__ (+${ach.score})\n||*${ach.desc}*||\n\n`
+    }
+  })
+
+  pages.push(new EmbedBuilder()
+  .setTitle(`Succès généraux de ${user.displayName}`)
+  .setColor(colorgold)
+  .setThumbnail(user.avatar)
+  .setDescription(descGen))
 
   const buttons = [
     {emoji: '⬅', style: Discord.ButtonStyle.Primary},
     {emoji: '➡', style: Discord.ButtonStyle.Primary},
   ]
 
-  //const selectMenu = {enable: true, pageOnly: true, placeholder: "Page"}
-
-  new Pagination().setCommand(interaction).setPages(pages).setButtons(buttons)/*.setSelectMenu(selectMenu)*/.send()
+  new Pagination().setCommand(interaction).setPages(pages).setButtons(buttons).send()
 
 }
 
@@ -538,7 +588,7 @@ bot.on('interactionCreate', async (interaction) => {
   if(!interaction.isCommand() && !interaction.isButton()) {
     return
   }
-  const { commandName, options } = interaction
+  const { commandName } = interaction
 
   if(commandName == "p") {
     let user = null
@@ -611,7 +661,12 @@ bot.on('interactionCreate', async (interaction) => {
             new ButtonBuilder()
             .setCustomId('stats')
             .setLabel('📊 Statistiques')
-            .setStyle('Secondary')
+            .setStyle('Secondary'),
+
+            new ButtonBuilder()
+            .setCustomId(`succes-${interaction.user.id}`)
+            .setLabel('🏆 Succès')
+            .setStyle('Secondary'),
           )
         ],
         fetchReply: true
@@ -1262,6 +1317,7 @@ bot.on('interactionCreate', async (interaction) => {
         type = Farm.prototype.fragment()
         break
     }
+
     if(type == undefined || user[type.farm].disco == false) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Object Inconnu").setColor(colorRouge)], fetchReply: true}).then(sent => {
       setTimeout(() => {
         sent.delete()
@@ -1604,8 +1660,6 @@ bot.on('interactionCreate', async (interaction) => {
         break
     }
 
- 
-
     if(type == undefined || user[type.farm].disco == false) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setTitle("Objet Inconnu").setColor(colorRouge)]}).then(sent => {
       setTimeout(() => {
         sent.delete()
@@ -1718,7 +1772,15 @@ bot.on('interactionCreate', async (interaction) => {
         }
         return false
       })
-      succes(user, interaction)
+
+      let userInteract = listeProfiles.find(user => {
+        if(interaction.member.id == user.id) {
+          return true
+        }
+        return false
+      })
+
+      succes(user, interaction, userInteract)
     }else if(interaction.customId.split(" ")[0] == "+1") {
       let user = listeProfiles.find(user => {
         if(interaction.user.id == user.id) {
