@@ -14,15 +14,24 @@ const widow = require('./13widow')
 const aimbot = require('./14aimbot')
 const nexus = require('./15nexus')
 const shulker = require('./16shulker')
+const leviator = require('./17leviator')
+const guardian = require('./18illeria')
+const bongo = require('./19gongo')
+const gazette = require('./20gazette')
+const cite = require('./21pandoutayah')
+const casino = require('./22casino')
 const academy = require('./23academy')
+const papa = require('./24papa')
+const vip = require('./25vip')
+const fragment = require('./26fragment')
 
 
 
 class Farm{
 
   getAll(){
-    return [this.genji(), this.health(), this.kana(), this.gobelet(), this.eater(), this.levi(), this.bot(), this.helico(), this.tatayeah(), this.aykicat(), this.bombe(), this.belugods(), this.widow(), this.nexus(),
-    this.shulker(), this.academy()]
+    return [this.genji(), this.health(), this.kana(), this.gobelet(), this.eater(), this.levi(), this.bot(), this.helico(), this.tatayeah(), this.aykicat(), this.bombe(), this.belugods(), this.widow(), this.aimbot(), this.nexus(),
+    this.shulker(), this.leviator(), this.guardian(), this.bongo(), this.gazette(), this.cite(), this.casino(), this.academy(), this.papa(), this.vip(), this.fragment()]
   }
 
   genji(){
@@ -77,6 +86,10 @@ class Farm{
     return new widow()
   }
 
+  aimbot(){
+    return new aimbot()
+  }
+
   nexus(){
     return new nexus()
   }
@@ -85,8 +98,44 @@ class Farm{
     return new shulker()
   }
 
+  leviator(){
+    return new leviator()
+  }
+
+  guardian(){
+    return new guardian()
+  }
+
+  bongo(){
+    return new bongo()
+  }
+
+  gazette(){
+    return new gazette()
+  }
+
+  cite(){
+    return new cite()
+  }
+
+  casino(){
+    return new casino()
+  }
+
   academy(){
     return new academy()
+  }
+
+  papa(){
+    return new papa()
+  }
+
+  vip(){
+    return new vip()
+  }
+
+  fragment(){
+    return new fragment()
   }
 }
 

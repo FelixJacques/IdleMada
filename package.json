@@ -18,6 +18,7 @@
   "homepage": "https://github.com/maladarix/IdleMada#readme",
   "dependencies": {
     "approximate-number": "^2.1.0",
+    "customizable-discordjs-pagination": "^2.0.1",
     "discord.js": "^14.6.0",
     "fs": "*",
     "luxon": "^3.0.4",
