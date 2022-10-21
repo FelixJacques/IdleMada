@@ -1031,25 +1031,63 @@ bot.on('interactionCreate', async (interaction) => {
       case "health":
       case "pack":
       case "heal":
+      case "healthpack":
+      case "healpack":
         type = Farm.prototype.health()
         break
 
       case "kana":
-      case "kanasheah":
+      case "kanasheeesh":
+      case "kanasheesh":
+      case "kanashesh":
+      case "sheeesh" :
+      case "sheesh" :
+      case "shesh" :
+      
         type = Farm.prototype.kana()
         break
 
+      case "gobelet" :
+      case "goblet" :
+      case "pappusu" :
+      case "papusu" :
+      case "gobelet de pappusu" :
+      case "goblet de pappusu" :
+      case "gobelet papusu" :
+      case "gobelet pappusu" :
+      
+
+      type = Farm.prototype.gobelet()
+      break
+
       case "eater":
+      case "z":
+      case "zeater":
+      case "z-eater":
+      case "zeklown" :
+
         type = Farm.prototype.eater()
         break
+      
 
       case "levi":
       case "smol":
+      case "smol levi":
+      case "livai" :
+      case "smol livai" :
+      case "rivaille" :    
+      case "smol rivaille" :  
+      case "levai" :  
+      case "smol levai" :  
+
         type = Farm.prototype.levi()
         break
 
       case "bot":
       case "overstats":
+      case "bot overstats":
+
+
         type = Farm.prototype.bot()
         break
 
@@ -1068,7 +1106,7 @@ bot.on('interactionCreate', async (interaction) => {
         break
 
       case "bombe":
-      case "hiesco":
+      case "hiesko":
         type = Farm.prototype.bombe()
         break
 
