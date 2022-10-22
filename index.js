@@ -86,7 +86,7 @@ function succes(user, interaction, userDem) {
   .setTitle(`Succès de ${user.displayName}`)
   .setColor(colorgold)
   .setThumbnail(user.avatar)
-  .setDescription(`Obtenus: \`${user.achivementsId.length} / ${achiv(user).length + 20}\`\n\nScore: \`${user.succScore}\``)
+  .setDescription(`Obtenus: \`${user.achivementsId.length} / ${achiv(user).length + 20}\`\n\n🏆 Score: \`${user.succScore}\``)
 
   let listeAchGen = []
   let listeAch = []
@@ -94,35 +94,19 @@ function succes(user, interaction, userDem) {
     if(ach.farm == null) {
       listeAchGen.push(ach)
     }else if(ach.name == "Kana Time") {
-      if(userDem == undefined) {
-        if(user[ach.farm].disco == true) {
-          listeAch.push(ach)
-        }
-      }else{
-
-        if(userDem[ach.farm].disco == true && user[ach.farm].disco == true) {
-          listeAch.push(ach)
-        }
-      }
-    }else if(ach.name == "C’est l’heure de manger !") {
-      if(userDem == undefined) {
-        if(userDem[ach.farm].disco == true && user[ach.farm].disco == true) {
-          listeAch.push(ach)
-        }
-      }else{
-        if(userDem[ach.farm].disco == true) {
-          listeAch.push(ach)
-        }
-      }
-    }else if(user[ach.farm].disco == true) {
-      if(userDem != undefined) {
-        if(userDem[ach.farm].disco == true) {
-          listeAch.push(ach)
-        }
-      }else{
+      if((userDem[ach.farm].disco == true && user[ach.farm].disco) || ((user.id == userDem.id) && user.achivementsId.includes(121))) {
         listeAch.push(ach)
       }
+      
+    }else if(ach.name == "C’est l’heure de manger !") {
+      if((userDem[ach.farm].disco == true && user[ach.farm].disco) || ((user.id == userDem.id) && user.achivementsId.includes(122))) {
+        listeAch.push(ach)
+      }
+    
+    }else if((userDem[ach.farm].disco == true && user[ach.farm].disco) || ((user.id == userDem.id) && user.achivementsId.includes(ach.id))) {
+      listeAch.push(ach)
     }
+
   });
   let desc = ""
   let x = 0
@@ -151,7 +135,7 @@ function succes(user, interaction, userDem) {
   let descr = ""
   for (let a = 0; a < specialAchId.length; a++) {
     has = false
-    if(user[specialAchId[a].type].disco == true) {
+    if(user[specialAchId[a].type].disco == true || user.achivementsId.includes(specialAchId[a].id)) {
       if(userDem != undefined) {
         if(userDem[specialAchId[a].type].disco == true) {
           if(user.achivementsId.includes(specialAchId[a].id)) {
@@ -381,13 +365,67 @@ function profilCmd(user, interaction = undefined) {
   .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${interaction == undefined ? lastProfil.dex.user.avatar : interaction.options._hoistedOptions.length == 1 ? interaction.options._hoistedOptions[0].user.avatar : interaction.member.user.avatar}.png?size=256`)
   .addFields(
     {name: `AykiCash <:aykicash:1031518293456076800> `, value: `\`${approx(hexToInt(user.money), approxOpts)}\``},
-    {name: `Revenus 📈`, value: `\`+ ${approx(hexToInt(user.cps), approxOpts)} / sec\``},
+    {name: `Revenus 📈`, value: `\`+ ${approx(hexToInt(user.money) < 1000000 ? parseInt((gainPrestige ** user.prestige) * parseInt(hexToInt(user.cps))) : Math.ceil((parseInt(gainPrestige ** user.prestige)) * (hexToInt(user.cps))), approxOpts)} / sec\``},
     {name: `Meilleur item ⭐`, value: `||${lastItem}||\n${nouvelItem ? "*Nouvel item disponible !*" : ""}`}
   )
   .setColor(colorTurq)
   
   return embedProfil
 }
+
+setInterval(() => {
+
+  if(Math.floor(Math.random() * 1500) == 69) {
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    components: [
+      new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+        .setCustomId(`claimThug`)
+        .setLabel("Attraper")
+        .setStyle("Success")   
+      )
+    ]}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 300000);
+    })    
+  }
+
+  if(Math.floor(Math.random() * 15000) == 420) {
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    components: [
+      new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+        .setCustomId(`claimRGB`)
+        .setLabel("Attraper")
+        .setStyle("Success")   
+      )
+    ]}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 450000);
+    }) 
+  }
+
+  if(Math.floor(Math.random() * 100000) == 69420) {
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    components: [
+      new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+        .setCustomId(`claimGold`)
+        .setLabel("Attraper")
+        .setStyle("Success")   
+      )
+    ]}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 600000);
+    }) 
+  }
+}, 5000);
 
 setInterval(() => {
   go ++
@@ -456,6 +494,7 @@ setInterval(() => {
     achiv(listeProfiles[i]).forEach(ach => {
       if(ach.cond == true && !listeProfiles[i].achivementsId.includes(ach.id)) {
         listeProfiles[i].achivementsId.push(ach.id)
+        listeProfiles[i].succScore += ach.score
 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
           .setDescription(`**► __${ach.name}__ ◄**\n\n + ${ach.score} Points de succès`)
@@ -469,6 +508,7 @@ setInterval(() => {
       if(DateTime.now().setZone("CET").hour == 12 && DateTime.now().setZone("CET").minute >= 0 && DateTime.now().setZone("CET").minute <= 12) {
         if(!acheteursEater[i].achivementsId.includes(20)) {
           listeProfiles[i].achivementsId.push(20)
+          listeProfiles[i].succScore += ach.score
 
           bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
             .setDescription(`**► __C’est l’heure de manger !__ ◄**\n\n + 200 Points de succès`)
@@ -485,6 +525,7 @@ setInterval(() => {
       if(DateTime.now().setZone("CET").hour == 4 && DateTime.now().setZone("CET").minute >= 0 && DateTime.now().setZone("CET").minute <= 20) {
         if(!acheteursKana[i].achivementsId.includes(12)) {
           listeProfiles[i].achivementsId.push(12)
+          listeProfiles[i].succScore += ach.score
   
           bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
             .setDescription(`**► __Kana Time__ ◄**\n\n + 200 Points de succès`)
@@ -527,6 +568,11 @@ bot.on("ready", async () => {
         type: Discord.ApplicationCommandOptionType.User
       }
     ]
+  })
+
+  commands.create({
+    name: "prestige",
+    description: "Te permet de passer aux prochains prestige",
   })
 
   commands.create({
@@ -610,7 +656,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -687,7 +733,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)], fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -1005,12 +1051,75 @@ bot.on('interactionCreate', async (interaction) => {
         ]})
       }
     }else{
-      interaction.reply({embeds: [new EmbedBuilder().setTitle("Code Inconnu").setColor(colorRouge)], fetchReply: true}).then(sent => {
+      interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Code Inconnu`).setColor(colorRouge)], fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
       })    
     }
+  }
+
+  if(commandName == "prestige") {
+    let user = listeProfiles.find(user => {
+      if(user.id == interaction.user.id) {
+        return true
+      }
+      return false
+    })
+
+    if(user == undefined) {
+      interaction.reply({embeds: [new EmbedBuilder()
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
+        .setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })    
+      return
+    }
+    let numPrestige = 0
+    let prixPres = 0
+    numPrestige = -1
+      prixPres = 0
+      let currentPrice = (augPrestige ** user.prestige) * basePrestige
+      do  {
+        prixPres += currentPrice;
+        currentPrice *= augPrestige;
+        numPrestige++;
+
+      }while (Math.round(prixPres) <= (hexToInt(user.money)))
+      prixPres = Math.round((basePrestige * (augPrestige ** (user.prestige + numPrestige) - augPrestige ** user.prestige)) / (augPrestige - 1))
+
+    if(numPrestige == 0) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas assez d'argent!`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+      setTimeout(() => {
+        sent.delete()
+      }, 3000);
+    })
+
+    interaction.reply({embeds: [new EmbedBuilder()
+      .setTitle(`Prestige || ${user.displayName}`)
+      .setDescription(`Chaque prestige augmente de 2% le revenu total.\n\n + ${numPrestige} 💎`)
+      .setThumbnail(user.avatar)
+      .addFields(
+        {name: "Tu perds:", value: "-Tout ton aykicash\n-Tout tes items", inline: false},
+        {name: "Tu gardes:", value: "-Tes succès\n-Les améliorations", inline: false},
+        {name: "Coût:", value: `\`${approx(prixPres, approxOpts)}\`$`, inline: false}
+      ).setColor("#d184fa")
+    ],components: [
+      new ActionRowBuilder()
+      .addComponents(
+
+        new ButtonBuilder()
+        .setCustomId(`acceptPrestige ${interaction.member.id} ${numPrestige}`)
+        .setEmoji("✅")
+        .setStyle("Success")
+        ,
+        new ButtonBuilder()
+        .setCustomId(`denyPrestige ${interaction.member.id}`)
+        .setLabel("Fermer")
+        .setStyle("Secondary")    
+      )
+    ]})
   }
 
   if(commandName == "shop") {
@@ -1023,7 +1132,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -1045,7 +1154,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -1067,7 +1176,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -1318,7 +1427,7 @@ bot.on('interactionCreate', async (interaction) => {
         break
     }
 
-    if(type == undefined || user[type.farm].disco == false) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Object Inconnu").setColor(colorRouge)], fetchReply: true}).then(sent => {
+    if(type == undefined || user[type.farm].disco == false) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Object Inconnu`).setColor(colorRouge)], fetchReply: true}).then(sent => {
       setTimeout(() => {
         sent.delete()
       }, 3000);
@@ -1377,7 +1486,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     if(user == undefined) {
       interaction.reply({embeds: [new EmbedBuilder()
-        .setDescription("Aucun profil associé avec ce compte.")
+        .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
         .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
@@ -1395,7 +1504,7 @@ bot.on('interactionCreate', async (interaction) => {
     }else if(interaction.options._hoistedOptions[1].name == "nombre") {
       if(interaction.options._hoistedOptions[1].value <= 0 || interaction.options._hoistedOptions[1].value > 1000) {
 
-        interaction.reply({embeds: [new EmbedBuilder().setTitle("Le nombre d'object doit être entre 0 et 1000").setColor(colorRouge),], ephemeral: false, fetchReply: true}).then(sent => {
+        interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Le nombre d'object doit être entre 0 et 1000`).setColor(colorRouge),], ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
           }, 3000);
@@ -1406,7 +1515,7 @@ bot.on('interactionCreate', async (interaction) => {
         max = true
 
       }else if(isNaN(interaction.options._hoistedOptions[1].value)){
-        interaction.reply({embeds: [new EmbedBuilder().setTitle("Argument impossible").setColor(colorRouge),], ephemeral: false, fetchReply: true}).then(sent => {
+        interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Argument impossible`).setColor(colorRouge),], ephemeral: false, fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
           }, 3000);
@@ -1660,7 +1769,7 @@ bot.on('interactionCreate', async (interaction) => {
         break
     }
 
-    if(type == undefined || user[type.farm].disco == false) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setTitle("Objet Inconnu").setColor(colorRouge)]}).then(sent => {
+    if(type == undefined || user[type.farm].disco == false) return interaction.reply({fetchReply: true, embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Objet Inconnu`).setColor(colorRouge)]}).then(sent => {
       setTimeout(() => {
         sent.delete()
       }, 3000);
@@ -1682,13 +1791,13 @@ bot.on('interactionCreate', async (interaction) => {
 
       let cost = Math.round(((prix * (1.15 ** (user[type.farm].number + parseInt(nombre)) - 1.15 ** user[type.farm].number)) / 0.15) * bonus)
 
-      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
       })    
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
@@ -1712,7 +1821,62 @@ bot.on('interactionCreate', async (interaction) => {
   }
 
   if(interaction.isButton()) {
-    if(interaction.customId == "stats") { //stats
+    if(interaction.customId.split(" ")[0] == `acceptPrestige`) {
+      if(interaction.customId.split(" ")[1] == interaction.member.id) {
+
+        interaction.message.delete()
+
+        let user = listeProfiles.find(user => {
+          if(user.id == interaction.user.id) {
+            return true
+          }
+          return false
+        })
+    
+        if(user == undefined) {
+          interaction.reply({embeds: [new EmbedBuilder()
+            .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
+            .setColor(colorRouge)],ephemeral: false, fetchReply: true}).then(sent => {
+              setTimeout(() => {
+                sent.delete()
+              }, 3000);
+            })    
+          return
+        }
+
+        user.prestige += parseInt(interaction.customId.split(" ")[2])
+        user.money = "64"
+        user.cps = "0"
+
+        Farm.prototype.getAll().forEach(farm => {
+          user[farm.farm].disco = false
+          user[farm.farm].number = 0
+        });
+
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`**${user.displayName}** a atteint le niveau **${user.prestige}** de prestige!💎`)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })
+
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas accès a ce bouton`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })
+      }
+    }else if(interaction.customId.split(" ")[0] == `denyPrestige`) {
+      if(interaction.customId.split(" ")[1] == interaction.member.id) {
+        interaction.message.delete()
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas accès a ce bouton`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })
+      }
+    }else if(interaction.customId == "stats") { //stats
       let user = listeProfiles.find(user => {
         if(interaction.message.embeds[0].title.includes(user.displayName)) {
           return true
@@ -1727,12 +1891,12 @@ bot.on('interactionCreate', async (interaction) => {
         return false
       })
 
-      if(userInteract == undefined || user == undefined) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Il te faut un profil MadaIdle! Tape /play pour commencer.").setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(userInteract == undefined || user == undefined) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Il te faut un profil MadaIdle! Tape /play pour commencer.`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
       })
-      let desc = `**Argent Total:** \`${approx(hexToInt(user.totalMoney), approxOpts)}\` <:aykicash:1031518293456076800>\n\n`
+      let desc = `**Argent Total:** \`${approx(hexToInt(user.totalMoney), approxOpts)}\` <:aykicash:1031518293456076800>\n\n**🏆 Score Succès :** \`${user.succScore}\`\n\n**<:LucioThug:887848266597822535> Lucio Thug attrapés :** \`${user.lucioThug}\`\n\n**<:LucioRGB:887845591160348744> Lucio RGB attrapés :** \`${user.lucioRGB}\`\n\n**<:LucioGolden:887847813550055474> Lucio Gold attrapés :** \`${user.lucioGold}\`\n\n`
 
       for (let i = 0; i < Farm.prototype.getAll().length; i++) {
         let farm = Farm.prototype.getAll()[i]
@@ -1765,7 +1929,7 @@ bot.on('interactionCreate', async (interaction) => {
         return false
       })
       shop(user, interaction)
-    }else if(interaction.customId.endsWith(interaction.user.id) && interaction.customId.startsWith("succes")) { //succes
+    }else if(interaction.customId.startsWith("succes")) { //succes
       let user = listeProfiles.find(user => {
         if(interaction.message.embeds[0].title.includes(user.displayName)) {
           return true
@@ -1792,7 +1956,7 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(1)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
@@ -1823,7 +1987,7 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(10)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
@@ -1854,7 +2018,7 @@ bot.on('interactionCreate', async (interaction) => {
       let type = Farm.prototype.getAll()[Farm.prototype.getAll().findIndex(farm => farm.farm == interaction.customId.split(" ")[1])]
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(100)) - 1.15 ** user[type.farm].number)) / 0.15) * user[type.farm].multi)
 
-      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost > hexToInt(user.money)) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setDescription(`${approx(hexToInt(user.money), approxOpts)}/${approx(cost, approxOpts)}\n${progressbar.splitBar(cost, parseInt(hexToInt(user.money)), 20)}`).setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
@@ -1899,7 +2063,7 @@ bot.on('interactionCreate', async (interaction) => {
 
       let cost = Math.round(((hexToInt(type.cost) * (1.15 ** (user[type.farm].number + parseInt(nombre)) - 1.15 ** user[type.farm].number)) / 0.15) * bonus)
 
-      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu n'as pas asser d'argent").setColor(colorRouge)], ephemeral: false, fetchReply: true}).then(sent => {
+      if(cost == 0) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas asser d'argent`).setColor(colorRouge)], fetchReply: true}).then(sent => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
@@ -1918,24 +2082,83 @@ bot.on('interactionCreate', async (interaction) => {
           sent.delete()
         }, 5000);
       })
+    }else if(interaction.customId == "claimThug") {
+      let user = listeProfiles.find(user => {
+        if(user.id == interaction.user.id) {
+          return true
+        }
+        return false
+      })
+  
+      if(user == undefined) {
+        interaction.reply({embeds: [new EmbedBuilder()
+          .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
+          .setColor(colorRouge)], fetchReply: true}).then(sent => {
+            setTimeout(() => {
+              sent.delete()
+            }, 3000);
+          })    
+        return
+      }
+
+      interaction.message.delete()
+      user.lucioThug ++
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Thug**!`).setColor(colorVert).setThumbnail("")]})
+    }else if(interaction.customId == "claimRGB") {
+      let user = listeProfiles.find(user => {
+        if(user.id == interaction.user.id) {
+          return true
+        }
+        return false
+      })
+  
+      if(user == undefined) {
+        interaction.reply({embeds: [new EmbedBuilder()
+          .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
+          .setColor(colorRouge)], fetchReply: true}).then(sent => {
+            setTimeout(() => {
+              sent.delete()
+            }, 3000);
+          })    
+        return
+      }
+
+      interaction.message.delete()
+      user.lucioRGB ++
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio RGB**!`).setColor(colorVert).setThumbnail("")]})
+    }else if(interaction.customId == "claimGold") {
+      let user = listeProfiles.find(user => {
+        if(user.id == interaction.user.id) {
+          return true
+        }
+        return false
+      })
+  
+      if(user == undefined) {
+        interaction.reply({embeds: [new EmbedBuilder()
+          .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
+          .setColor(colorRouge)], fetchReply: true}).then(sent => {
+            setTimeout(() => {
+              sent.delete()
+            }, 3000);
+          })    
+        return
+      }
+
+      interaction.message.delete()
+      user.lucioGold ++
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Doré**!`).setColor(colorVert).setThumbnail("")]})
     }
     
     
     else{
       if(interaction.customId.startsWith("shop")) {
-        return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu ne peux pas voir la boutique des autres.").setColor(colorRouge)], fetchReply: true}).then(sent => {
-          setTimeout(() => {
-            sent.delete()
-          }, 3000);
-        })
-      }else if(interaction.customId.startsWith("succes")) {
-        return interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu ne peux pas voir les succès des autres.").setColor(colorRouge)], fetchReply: true}).then(sent => {
+        return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu ne peux pas voir la boutique des autres.`).setColor(colorRouge)], fetchReply: true}).then(sent => {
           setTimeout(() => {
             sent.delete()
           }, 3000);
         })
       }
-
     }
   }
 })
@@ -1957,7 +2180,7 @@ bot.on("messageCreate", async (message) => {
     for (let i = 0; i < listeProfiles.length; i++) {
       if(listeProfiles[i].id == message.member.id) {
         message.channel.send({embeds: [new EmbedBuilder()
-        .setDescription(`Tu es déja inscrit! Fait **${prefix}profil**`)
+        .setDescription(`<@${listeProfiles[i].id}> Tu es déja inscrit! Fait **${prefix}profil**`)
         .setColor(colorRouge)]})
         return
       }
