@@ -376,7 +376,7 @@ function profilCmd(user, interaction = undefined) {
 setInterval(() => {
 
   if(Math.floor(Math.random() * 1500) == 69) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -393,7 +393,7 @@ setInterval(() => {
   }
 
   if(Math.floor(Math.random() * 15000) == 420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -410,7 +410,7 @@ setInterval(() => {
   }
 
   if(Math.floor(Math.random() * 100000) == 69420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -2103,7 +2103,7 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioThug ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Thug**!`).setColor(colorVert).setThumbnail("")]})
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Thug**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")]})
     }else if(interaction.customId == "claimRGB") {
       let user = listeProfiles.find(user => {
         if(user.id == interaction.user.id) {
@@ -2125,7 +2125,7 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioRGB ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio RGB**!`).setColor(colorVert).setThumbnail("")]})
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio RGB**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")]})
     }else if(interaction.customId == "claimGold") {
       let user = listeProfiles.find(user => {
         if(user.id == interaction.user.id) {
@@ -2147,7 +2147,7 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioGold ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Doré**!`).setColor(colorVert).setThumbnail("")]})
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Doré**!!!!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")]})
     }
     
     
