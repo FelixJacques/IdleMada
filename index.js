@@ -9,6 +9,7 @@ var approx = require('approximate-number');
 
 const Profil = require('./src/profil')
 const Farm = require('./src/farm/farm')
+const Upgrades = require('./src/upgrades/upgrades')
 const achiv = require('./src/succes')
 
 require("dotenv").config()
@@ -23,7 +24,7 @@ if(test == true) {
 }
 let acheteursKana = []
 let acheteursEater = []
-let prefix = "$"
+let prefix = "!"
 let listeProfiles = []
 let colorRouge = "#ED4245"
 let colorVert = "#28eb73"
@@ -376,7 +377,7 @@ function profilCmd(user, interaction = undefined) {
 setInterval(() => {
 
   if(Math.floor(Math.random() * 1500) == 69) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -388,12 +389,12 @@ setInterval(() => {
     ]}).then(sent => {
       setTimeout(() => {
         sent.delete()
-      }, 300000);
+      }, 30000);
     })    
   }
 
   if(Math.floor(Math.random() * 15000) == 420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -405,12 +406,12 @@ setInterval(() => {
     ]}).then(sent => {
       setTimeout(() => {
         sent.delete()
-      }, 450000);
+      }, 45000);
     }) 
   }
 
   if(Math.floor(Math.random() * 100000) == 69420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setThumbnail("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -422,7 +423,7 @@ setInterval(() => {
     ]}).then(sent => {
       setTimeout(() => {
         sent.delete()
-      }, 600000);
+      }, 60000);
     }) 
   }
 }, 5000);
@@ -1090,7 +1091,7 @@ bot.on('interactionCreate', async (interaction) => {
       }while (Math.round(prixPres) <= (hexToInt(user.money)))
       prixPres = Math.round((basePrestige * (augPrestige ** (user.prestige + numPrestige) - augPrestige ** user.prestige)) / (augPrestige - 1))
 
-    if(numPrestige == 0) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas assez d'argent!`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+    if(numPrestige == 0) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas assez d'argent!\n\n${approx(hexToInt(user.money), approxOpts)}/${approx(Math.round((basePrestige * (augPrestige ** (user.prestige + 1) - augPrestige ** user.prestige)) / (augPrestige - 1)), approxOpts)}\n${progressbar.splitBar(Math.round((basePrestige * (augPrestige ** (user.prestige + 1) - augPrestige ** user.prestige)) / (augPrestige - 1)), hexToInt(user.money), 20)}`).setColor(colorRouge)], fetchReply: true}).then(sent => {
       setTimeout(() => {
         sent.delete()
       }, 3000);
@@ -1468,7 +1469,7 @@ bot.on('interactionCreate', async (interaction) => {
           .setStyle("Secondary"),
 
           new ButtonBuilder()
-          .setCustomId("upgrades")
+          .setCustomId(`upgrades ${type.farm} ${type.name}`)
           .setLabel("⬆️ Améliorations")
           .setStyle("Success")
         )
@@ -2103,7 +2104,8 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioThug ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Thug**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")]})
+      user.money = intToHex(hexToInt(user.money) * 115)
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Thug** lui rapportant **${approx((hexToInt(user.money) * 115) - (hexToInt(user.money)), approxOpts)}$**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")]})
     }else if(interaction.customId == "claimRGB") {
       let user = listeProfiles.find(user => {
         if(user.id == interaction.user.id) {
@@ -2125,7 +2127,8 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioRGB ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio RGB**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")]})
+      user.money = intToHex(hexToInt(user.money) * 200)
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio RGB** lui rapportant **${approx((hexToInt(user.money) * 200) - (hexToInt(user.money)), approxOpts)}$**!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")]})
     }else if(interaction.customId == "claimGold") {
       let user = listeProfiles.find(user => {
         if(user.id == interaction.user.id) {
@@ -2147,9 +2150,115 @@ bot.on('interactionCreate', async (interaction) => {
 
       interaction.message.delete()
       user.lucioGold ++
-      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Doré**!!!!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")]})
+      user.money = intToHex(hexToInt(user.money) * 877)
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${user.id}> A attrapé un **Lucio Doré** lui rapportant **${approx((hexToInt(user.money) * 877) - (hexToInt(user.money)), approxOpts)}$**!!!!!`).setColor(colorVert).setThumbnail("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")]})
+    }else if(interaction.customId.startsWith("upgrades")) {
+      let user = listeProfiles.find(user => {
+        if(user.id == interaction.user.id) {
+          return true
+        }
+        return false
+      })
+      let desc = ""
+      let farmType = interaction.customId.split(" ")[1]
+
+      let farm = Farm.prototype.getAll().find(farm => {
+        if(farm.farm == farmType) {
+          return true
+        }
+        return false
+      })
+      let up = []
+      Upgrades(user).forEach(upgrade => {
+        if(upgrade.farm == farmType) {
+          up.push(upgrade)
+          if(user.upgradeId.includes(upgrade.id)) {
+            desc += `✅ **${upgrade.name}**\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "coût /"} ${upgrade.up}\`\n\n`
+          }else{
+            if(upgrade.cond == true) {
+              desc += `🟥 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix))}\`\n\n`
+            }else{
+              desc += `🔒 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix))}\`\n\n`
+            }
+          }
+        }
+      });
+
+      interaction.reply({embeds: [new EmbedBuilder()
+      .setTitle(`Améliorations pour ${interaction.customId.split(`upgrades ${interaction.customId.split(" ")[1]} `)[1]}`)
+      .setColor(colorshop)
+      .setThumbnail(farm.img)
+      .setDescription(desc)
+    ],ephemeral:  true,
+      components: [
+      new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+          .setCustomId(`1 ${up[0].id}`)
+          .setEmoji("1️⃣")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`2 ${up[1].id}`)
+          .setEmoji("2️⃣")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`3 ${up[2].id}`)
+          .setEmoji("3️⃣")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`4 ${up[3].id}`)
+          .setEmoji("4️⃣")
+          .setStyle("Secondary"),
+
+          new ButtonBuilder()
+          .setCustomId(`5 ${up[4].id}`)
+          .setEmoji("5️⃣")
+          .setStyle("Secondary")
+        )
+    ],})
+    }else if(interaction.customId.startsWith("1") || interaction.customId.startsWith("2") || interaction.customId.startsWith("3") || interaction.customId.startsWith("4") || interaction.customId.startsWith("5")) {
+      let user = listeProfiles.find(user => {
+        if(user.id == interaction.user.id) {
+          return true
+        }
+        return false
+      })
+
+      let upgrade = Upgrades(user).find(upgrade => {
+        if(upgrade.id == interaction.customId.split(" ")[1]) {
+          return true
+        }
+        return false
+      })
+
+      if(user.upgradeId.includes(interaction.customId.split(" ")[1])) {
+        interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu as déjà cette amélioration!`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+          setTimeout(() => {
+            sent.delete()
+          }, 3000);
+        })
+        return
+      }
+
+      if(upgrade.cond == false || hexToInt(upgrade.prix) > user.money) return interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu ne peut pas acheter cette amélioration!`).setColor(colorRouge)], fetchReply: true}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 3000);
+      })
+      
+      user.dispense = hexToInt(user.dispense) + (hexToInt(upgrade.prix))
+      user.money = hexToInt(user.money) - (hexToInt(upgrade.prix))
+      user.upgradeId.push(upgrade.id)
+      interaction.reply({content: "."}).then(sent => {
+        setTimeout(() => {
+          sent.delete()
+        }, 1);
+      })
+      interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`**${user.displayName}** a acheté l'amélioration **${upgrade.name}**!`).setColor(colorVert)]})
     }
-    
     
     else{
       if(interaction.customId.startsWith("shop")) {
@@ -2188,7 +2297,6 @@ bot.on("messageCreate", async (message) => {
 
     message.react("👍")
     listeProfiles.push(new Profil(message))
-    console.log(listeProfiles)
     fs.writeFile('./data/data.json', JSON.stringify(listeProfiles), "utf8" , function(err) {
       if(err) throw err;})
   }

@@ -1,4 +1,3 @@
-const { DateTime } = require("luxon")
 function achiv (user) {
   return [
     {name: "Le début d’une grande aventure", cond: user.genji.number >= 1, id: 1, farm: "genji", score: 5, desc: "Acheter son premier Little Genji"},
