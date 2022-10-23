@@ -466,7 +466,7 @@ setInterval(() => {
     + ((hexToInt(Farm.prototype.academy().cps) * profil.academy.multi) * profil.academy.number) + ((hexToInt(Farm.prototype.papa().cps) * profil.papa.multi) * profil.papa.number) + ((hexToInt(Farm.prototype.vip().cps) * profil.vip.multi) * profil.vip.number) + ((hexToInt(Farm.prototype.fragment().cps) * profil.fragment.multi) * profil.fragment.number)).toFixed(0)
 
     profil.cps = intToHex(profit)
-    profil.totalMoney = intToHex(parseInt(hexToInt(profil.money)) + parseInt(hexToInt(profil.dispense)))
+    //profil.totalMoney = intToHex(parseInt(hexToInt(profil.money)) + parseInt(hexToInt(profil.dispense)))
     profil.money = intToHex(parseInt(hexToInt(profil.money)) + parseInt((gainPrestige ** profil.prestige) * parseInt(hexToInt(profil.cps))))
 
     profil.genji.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.genji().cps) * profil.genji.multi) * profil.genji.number) + BigInt(hexToInt(profil.genji.totalCash)))
