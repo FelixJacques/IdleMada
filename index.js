@@ -20,8 +20,9 @@ if(test == true) {
   var channelId = "828518673244618752"
 }else{
   var guildId = "267769973709996032"
-  var channelId = "1033620892544139264"
+  var channelId = "1034148414277025914"
 }
+let tryCode = []
 let acheteursKana = []
 let acheteursEater = []
 let prefix = "!"
@@ -70,7 +71,7 @@ function shop(user, interaction) {
       for (let i = 0; i < listeFarm.length; i++) {
         farm = listeFarm[i]
         if(user[farm.farm].disco == true) {
-          desc += `**${farm.name}**\n\`${approx(Math.round(((hexToInt(farm.cost) * (1.15 ** (user[farm.farm].number + 1) - 1.15 ** user[farm.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>\n\n`
+          desc += `**${farm.name}**: \`${approx(Math.round(((hexToInt(farm.cost) * (1.15 ** (user[farm.farm].number + 1) - 1.15 ** user[farm.farm].number)) / 0.15) * 1), approxOpts)}\` <:aykicash:1031518293456076800>\n\n`
         }
         if(user[listeFarm[i].farm].disco == false && user[listeFarm[i - 1].farm].disco == true) {
           desc += `*Débloqué prochainement*\n\`???\`\n`
@@ -344,20 +345,18 @@ function profilCmd(user, interaction = undefined) {
   let listeFarm = Farm.prototype.getAll()
   let lastItem = null
   let nouvelItem = null
+  let itemList = []
   for (let i = 0; i < listeFarm.length; i++) {
-    if(user[listeFarm[i].farm].number == 0 && i == 0) {
-      lastItem = "Aucun Item"
-      break
-    }else{
-      if(user[listeFarm[i].farm].number == 0 && user[listeFarm[i - 1].farm].number > 0) {
-        lastItem = listeFarm[i - 1].name
-        break
-      }
+    if(user[listeFarm[i].farm].number > 0) {
+      itemList.push(listeFarm[i])
     }
+  }
 
-    if(lastItem == null) {
-      lastItem = "Aucun Item"
-    }
+  if(itemList.length == 0) {
+    lastItem = "Aucun Item"
+
+  }else{
+    lastItem = itemList[itemList.length - 1].name
   }
 
   for (let i = 0; i < listeFarm.length; i++) {
@@ -382,7 +381,7 @@ function profilCmd(user, interaction = undefined) {
 
 setInterval(() => {
 
-  if(Math.floor(Math.random() * 300) == 69) { //1500) == 69) {
+  if(Math.floor(Math.random() * 400) == 69) { //300) == 69) {
     bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
@@ -394,11 +393,8 @@ setInterval(() => {
       )
     ]}).then(sent => {
       setTimeout(() => {
-        try {
-          bot.channels.cache.get(sent.channelId).fetch(sent.id) 
-        } catch (error) {
-          return
-        }
+        if(bot.channels.cache.get(channelId).messages.cache.get(sent.id) == undefined) return
+        sent.delete()
       }, 30000);
     })    
   }
@@ -415,12 +411,9 @@ setInterval(() => {
       )
     ]}).then(sent => {
       setTimeout(() => {
-        try {
-          bot.channels.cache.get(sent.channelId).fetch(sent.id) 
-        } catch (error) {
-          return
-        }
-      }, 45000); //45000
+        if(bot.channels.cache.get(channelId).messages.cache.get(sent.id) == undefined) return
+        sent.delete()
+      }, 45000);
     }) 
   }
 
@@ -436,11 +429,8 @@ setInterval(() => {
       )
     ]}).then(sent => {
       setTimeout(() => {
-        try {
-          bot.channels.cache.get(sent.channelId).fetch(sent.id) 
-        } catch (error) {
-          return
-        }
+        if(bot.channels.cache.get(channelId).messages.cache.get(sent.id) == undefined) return
+        sent.delete()
       }, 60000);
     }) 
   }
@@ -498,7 +488,7 @@ setInterval(() => {
     profil.vip.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.vip().cps) * profil.vip.multi) * profil.vip.number) + BigInt(hexToInt(profil.vip.totalCash)))
     profil.fragment.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.fragment().cps) * profil.fragment.multi) * profil.fragment.number) + BigInt(hexToInt(profil.fragment.totalCash)))
 
-    if(lastProfil && go >= 5) {
+    if(lastProfil && go >= 2) {
       lasMsgProfil.edit({embeds: [profilCmd(lastProfil.prm)]})      
       go = 0
     }
@@ -725,7 +715,13 @@ bot.on('interactionCreate', async (interaction) => {
         lasMsgProfil = sent
         lastProfil = {prm: user, dex: interaction.member}
         setTimeout(() => {
-          sent.delete()
+          if(sent.id == lasMsgProfil.id) {
+            lastProfil = null
+            lasMsgProfil = null
+            sent.delete()
+          }else{
+            sent.delete()
+          }
         }, 180000);
       })
     }else{
@@ -754,7 +750,13 @@ bot.on('interactionCreate', async (interaction) => {
         lasMsgProfil = sent
         lastProfil = {prm: user, dex: interaction.options._hoistedOptions[0]}
         setTimeout(() => {
-          sent.delete()
+          if(sent.id == lasMsgProfil.id) {
+            lasMsgProfil = null
+            lastProfil = null
+            sent.delete()
+          }else{
+            sent.delete()
+          }
         }, 180000);
       })
     }
@@ -1110,7 +1112,22 @@ bot.on('interactionCreate', async (interaction) => {
         setTimeout(() => {
           sent.delete()
         }, 3000);
-      })    
+      })
+
+      fs.readFile('./data/tryCode.json', "utf8", (err, JsonString) => {
+        if(err) {
+          console.log(err)
+        }else{
+          tryCode = JSON.parse(JsonString)
+        }
+      })
+
+      tryCode.push({id: interaction.member.id, code: code})
+
+      fs.writeFileSync('./data/tryCode.json', JSON.stringify(tryCode), "utf8" , function(err) {
+        if(err) throw err;})
+
+      tryCode = []
     }
   }
 
@@ -2167,12 +2184,13 @@ bot.on('interactionCreate', async (interaction) => {
       users.push(user)
 
       setTimeout(() => {
+        if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioThug ++
-        users[0].money = intToHex(parseInt((hexToInt(users[0].money)) * 1.15))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 1.15)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 1.15)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
+        users = []
       }, 2000);
-      users = []
 
     }else if(interaction.customId == "claimRGB") {
       let user = listeProfiles.find(user => {
@@ -2183,7 +2201,7 @@ bot.on('interactionCreate', async (interaction) => {
       })
   
       if(user == undefined) {
-        interaction.message.edit({embeds: [new EmbedBuilder()
+        interaction.reply({embeds: [new EmbedBuilder()
           .setDescription(`<@${interaction.member.id}> Aucun profil associé avec ce compte.`)
           .setColor(colorRouge)], fetchReply: true}).then(sent => {
             setTimeout(() => {
@@ -2208,12 +2226,13 @@ bot.on('interactionCreate', async (interaction) => {
       users.push(user)
 
       setTimeout(() => {
+        if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioRGB ++
-        users[0].money = intToHex(parseInt((hexToInt(users[0].money)) * 2))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 2)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 2)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
+        users = []
       }, 2000);
-      users = []
 
     }else if(interaction.customId == "claimGold") {
       let user = listeProfiles.find(user => {
@@ -2234,7 +2253,7 @@ bot.on('interactionCreate', async (interaction) => {
         return
       }
 
-      interaction.editReply({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
+      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
       components: [
         new ActionRowBuilder()
         .addComponents(
@@ -2249,12 +2268,14 @@ bot.on('interactionCreate', async (interaction) => {
       users.push(user)
       
       setTimeout(() => {
+        if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioGold ++
-        users[0].money = intToHex(parseInt((hexToInt(users[0].money)) * 7.77))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 7.77)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 7.77)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
+        users = []
       }, 2000);
-      users = []
+
     }else if(interaction.customId.startsWith("upgrades")) {
       let user = listeProfiles.find(user => {
         if(user.id == interaction.user.id) {
@@ -2279,9 +2300,9 @@ bot.on('interactionCreate', async (interaction) => {
             desc += `✅ **${upgrade.name}**\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "coût /"} ${upgrade.up}\`\n\n`
           }else{
             if(upgrade.cond == true) {
-              desc += `🟥 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix))}\`\n\n`
+              desc += `🟥 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix), approxOpts)}\`\n\n`
             }else{
-              desc += `🔒 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix))}\`\n\n`
+              desc += `🔒 **${upgrade.name}** (${upgrade.number})\n**Effet: **\`${upgrade.type == "cps" ? "CPS x" : "Coût /"} ${upgrade.up}\`\n**Prix <:aykicash:1031518293456076800>:** \`${approx(hexToInt(upgrade.prix), approxOpts)}\`\n\n`
             }
           }
         }
