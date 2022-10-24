@@ -197,9 +197,9 @@ function succes(user, interaction, userDem) {
 
         case "aykicat":
           if(has){
-            descr += `✅ **__L’identifiant du chat__** (+500)\n||*Claim le code secret d’Aykicat*||\n\n`
+            descr += `✅ **__L’identifiant des chats__** (+500)\n||*Claim le code secret d’Aykicat*||\n\n`
           }else{
-            descr += `🔒 __L’identifiant du chat__ (+500)\n||*Claim le code secret d’Aykicat*||\n\n`
+            descr += `🔒 __L’identifiant des chats__ (+500)\n||*Claim le code secret d’Aykicat*||\n\n`
           }
           break
 
@@ -213,9 +213,9 @@ function succes(user, interaction, userDem) {
         
         case "widow":
           if(has){
-            descr += `✅ **__Le tag universel__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `✅ **__Avant d'être un sniper__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }else{
-            descr += `🔒 __Le tag universel__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `🔒 __Avant d'être un sniper__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }
           break
 
@@ -229,17 +229,17 @@ function succes(user, interaction, userDem) {
         
         case "nexus":
           if(has){
-            descr += `✅ **__Il faut juste descendre__** (+500)\n||*Claim le code secret du Nexus*||\n\n`
+            descr += `✅ **__La berceuse du temps__** (+500)\n||*Claim le code secret du Nexus*||\n\n`
           }else{
-            descr += `🔒 __Il faut juste descendre__ (+500)\n||*Claim le code secret du Nexus*||\n\n`
+            descr += `🔒 __La berceuse du temps__ (+500)\n||*Claim le code secret du Nexus*||\n\n`
           }
           break
         
         case "shulker":
           if(has){
-            descr += `✅ **__Le coût des 6 renards multipliés__** (+500)\n||*Claim le code secret de Shulker Fox*||\n\n`
+            descr += `✅ **__Le coût des renards__** (+500)\n||*Claim le code secret de Shulker Fox*||\n\n`
           }else{
-            descr += `🔒 __Le coût des 6 renards multipliés__ (+500)\n||*Claim le code secret de Shulker Fox*||\n\n`
+            descr += `🔒 __Le coût des renards__ (+500)\n||*Claim le code secret de Shulker Fox*||\n\n`
           }
           break
 
@@ -293,9 +293,9 @@ function succes(user, interaction, userDem) {
 
         case "academy":
           if(has){
-            descr += `✅ **__La naissance du projet__** (+500)\n||*Claim le code secret de la Mada Academy*||\n\n`
+            descr += `✅ **__Un premier pas__** (+500)\n||*Claim le code secret de la Mada Academy*||\n\n`
           }else{
-            descr += `🔒 __La naissance du projet__ (+500)\n||*Claim le code secret de la Mada Academy*||\n\n`
+            descr += `🔒 __Un premier pas__ (+500)\n||*Claim le code secret de la Mada Academy*||\n\n`
           }
           break
 
@@ -870,7 +870,7 @@ bot.on('interactionCreate', async (interaction) => {
         ]})
       }
 
-    }else if(code == "430125201099849739") {
+    }else if(code == "360876364041158667") {
       if(!user.achivementsId.includes(39)) {
         user.achivementsId.push(39)
         user.succScore += 500
@@ -880,7 +880,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __L’identifiant du chat__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __L’identifiant des chats__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
@@ -904,7 +904,7 @@ bot.on('interactionCreate', async (interaction) => {
         ]})
       }
 
-    }else if(code == "2234") {
+    }else if(code == "symmetra") {
       if(!user.achivementsId.includes(51)) {
         user.achivementsId.push(51)
         user.succScore += 500
@@ -914,7 +914,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Le tag universel__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Avant d'être un sniper__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
@@ -938,7 +938,7 @@ bot.on('interactionCreate', async (interaction) => {
         ]})
       }
 
-    }else if(code == "d4n3xsus") {
+    }else if(code == "blue haven") {
       if(!user.achivementsId.includes(58)) {
         user.achivementsId.push(58)
         user.succScore += 500
@@ -948,14 +948,14 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Il faut juste descendre__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __La berceuse du temps__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
         ]})
       }
 
-    }else if(code == "119070") {
+    }else if(code == "43") {
       if(!user.achivementsId.includes(62)) {
         user.achivementsId.push(62)
         user.succScore += 500
@@ -965,7 +965,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Le coût des 6 renards multipliés__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Le coût des renards__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
@@ -1067,7 +1067,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Le mythique ancestra__ ◄**\n\n + 1000 Points de succès`)
+          .setDescription(`**► __Le mythique ancestral__ ◄**\n\n + 1000 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
@@ -1084,7 +1084,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __La naissance du projet__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Un premier pas__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
@@ -1173,7 +1173,7 @@ bot.on('interactionCreate', async (interaction) => {
       .setDescription(`Chaque prestige augmente de 2% le revenu total.\n\n + ${numPrestige} 💎`)
       .setThumbnail(user.avatar)
       .addFields(
-        {name: "Tu perds:", value: "-Tout ton aykicash\n-Tout tes items", inline: false},
+        {name: "Tu perds:", value: "-Tout ton aykicash\n-Tous tes items", inline: false},
         {name: "Tu gardes:", value: "-Tes succès\n-Les améliorations", inline: false},
         {name: "Coût:", value: `\`${approx(prixPres, approxOpts)}\`$`, inline: false}
       ).setColor("#d184fa")
