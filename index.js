@@ -1260,6 +1260,7 @@ bot.on('interactionCreate', async (interaction) => {
 
     joueurPlusRiche = listeProfiles
     joueurPlusRiche.sort((a, b) => parseInt(hexToInt(a.money)) < parseInt(hexToInt(b.money)) ? 1 : -1).slice(0, 10)
+<<<<<<< Updated upstream
     for (let i = 0; i < 5; i++) {
       richesse10 = intToHex(parseInt(hexToInt(richesse10)) + parseInt(hexToInt(joueurPlusRiche[i].money)))
       label.push(`${joueurPlusRiche[i].displayName}  ${approx(hexToInt(joueurPlusRiche[i].money, approxOpts))}`)
@@ -1269,6 +1270,15 @@ bot.on('interactionCreate', async (interaction) => {
     label.push(`Autres Joueurs  ${hexToInt(totalMoneyPres) - hexToInt(richesse10)}`)
     data.push(hexToInt(totalMoneyPres) - hexToInt(richesse10))
     
+=======
+    for (let i = 0; i < 3; i++) {
+      richesse10 = parseInt(hexToInt(richesse10)) + parseInt(hexToInt(joueurPlusRiche[i].money))
+      label.push(`${joueurPlusRiche[i].displayName} ${approx(hexToInt(joueurPlusRiche[i].money), approxOpts)}`)
+      data.push(hexToInt(joueurPlusRiche[i].money))
+      dataLab.push(approx(hexToInt(joueurPlusRiche[i].money), approxOpts))
+    }    
+
+>>>>>>> Stashed changes
     const chartDistribution = new ChartJsImage()
     chartDistribution.setConfig({
       type: 'pie',
@@ -1285,11 +1295,16 @@ bot.on('interactionCreate', async (interaction) => {
         plugins: {
           datalabels: {
             formatter: function(value, context) {
+<<<<<<< Updated upstream
               return context.chart.data.labels[context.dataIndex].split("  ")[1];
             },
             color: "white",
             borderRadius: 6,
             backgroundColor: '#2e2e2e',
+=======
+              return context.chart.data.labels[context.dataIndex].split(" ");
+            }
+>>>>>>> Stashed changes
           }
         }
       }
