@@ -5,7 +5,7 @@ class pandoutayah {
     this.cps = "42C1D80"
     this.cost = "5FC1B97136320000"
     this.farm = "cite"
-    this.des = "*L’eau bénite qui coule dans son fleuve souterrain est si pure qu’elle abriterait l’origine de la vie des saniks.*"
+    this.des = "*L’eau bénite qui coule dans son fleuve souterrain est si pure qu’elle abriterait l’origine de la vie des saniks. La visite guidée : https://youtu.be/p1qwONwMY2s*"
     this.img = "https://i.imgur.com/1vwHfPA.png"
   }
 }

@@ -15,7 +15,7 @@ const achiv = require('./src/succes')
 
 require("dotenv").config()
 
-let test = true
+let test = false
 if(test == true) {
   var guildId = "828485314304933931"
   var channelId = "828518673244618752"
@@ -23,6 +23,7 @@ if(test == true) {
   var guildId = "267769973709996032"
   var channelId = "1034148414277025914"
 }
+let listeCash = []
 let tryCode = []
 let acheteursKana = []
 let acheteursEater = []
@@ -41,6 +42,14 @@ let lastProfil = null
 let go = 0
 let users = []
 let approxOpts = {separator: " ", min10k: true, capital: true, decimal: 2}
+
+fs.readFile('./data/stats.json', "utf8", (err, JsonString) => {
+  if(err) {
+    console.log(err)
+  }else{
+    listeCash = JSON.parse(JsonString)
+  }
+})
 
 fs.readFile('./data/data.json', "utf8", (err, JsonString) => {
   if(err) {
@@ -214,9 +223,9 @@ function succes(user, interaction, userDem) {
         
         case "widow":
           if(has){
-            descr += `✅ **__L'assassin qui se fait ratio__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `✅ **__Son vrai nom__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }else{
-            descr += `🔒 __L'assassin qui se fait ratio__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `🔒 __Son vrai nom__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }
           break
 
@@ -246,9 +255,9 @@ function succes(user, interaction, userDem) {
 
         case "leviator":
           if(has){
-            descr += `✅ **__Le 3ème concurrent GX__** (+500)\n||*Claim le nom du concurrent de Léviator*||\n\n`
+            descr += `✅ **__Le 1er choix__** (+500)\n||*Claim le nom du concurrent de Léviator*||\n\n`
           }else{
-            descr += `🔒 __Le 3ème concurrent GX__ (+500)\n||*Claim le nom du concurrent de Léviator*||\n\n`
+            descr += `🔒 __Le 1er choix__ (+500)\n||*Claim le nom du concurrent de Léviator*||\n\n`
           }
           break
 
@@ -262,9 +271,9 @@ function succes(user, interaction, userDem) {
 
         case "bongo":
           if(has){
-            descr += `✅ **__Son premier pokémon__** (+500)\n||*Claim le nom du pokémon de Gongo the Bongo*||\n\n`
+            descr += `✅ **__Un dernier lancé__** (+500)\n||*Claim le nom du pokémon de Gongo the Bongo*||\n\n`
           }else{
-            descr += `🔒 __Son premier pokémon__ (+500)\n||*Claim le nom du pokémon de Gongo the Bongo*||\n\n`
+            descr += `🔒 __Un dernier lancé__ (+500)\n||*Claim le nom du pokémon de Gongo the Bongo*||\n\n`
           }
           break
 
@@ -382,8 +391,8 @@ function profilCmd(user, interaction = undefined) {
 
 setInterval(() => {
 
-  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 2000) == 69 : Math.floor(Math.random() * 1300) == 69) { //300) == 69) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
+  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 1700) == 69 : Math.floor(Math.random() * 1100) == 69) { //300) == 69) {
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **30min** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -401,7 +410,7 @@ setInterval(() => {
   }
 
   if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 18000) == 420 : Math.floor(Math.random() * 10000) == 420) { //15000) == 420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **2h** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -419,7 +428,7 @@ setInterval(() => {
   }
 
   if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 60000) == 777 : Math.floor(Math.random() * 40000) == 777) { //100000) == 69420) {
-    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
+    bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **7h** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
       .addComponents(
@@ -436,6 +445,43 @@ setInterval(() => {
     }) 
   }
 }, 5000);
+
+setInterval(() => {
+
+  listeProfiles.forEach(profil => {
+    if(listeCash.length != 0) {
+
+      let user = listeCash.find(user => {
+        if(user.id == profil.id) {
+          return true
+        }
+        return false
+      })
+
+      if(user != undefined) {
+        if(user.money.length == 52) {
+          user.money.shift()
+          user.money.push(profil.totalMoney)
+        }else{
+          user.money.push(profil.totalMoney)
+        }
+        
+      }else {
+        listeCash.push({id: profil.id, name: profil.displayName, money: [profil.totalMoney]})
+      }
+    
+    }else{
+      listeCash.push({id: profil.id, name: profil.displayName, money: [profil.totalMoney]})
+    }
+  })
+
+  fs.writeFileSync('./data/stats.json', JSON.stringify(listeCash), "utf8" , function(err) {
+    if(err) throw err;})
+
+  fs.writeFileSync('./data/stats2.json', JSON.stringify(listeCash), "utf8" , function(err) {
+    if(err) throw err;})
+
+}, 6 * 60 * 60 * 1000); //6 * 60 * 60 * 1000
 
 setInterval(() => {
   let topic = "Classement:\n"
@@ -802,7 +848,7 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Je procrastine__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
       }else{
         interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
@@ -821,8 +867,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Mon nom__ ◄**\n\n + 200 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
-        ]})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
+        ]}) 
+      }else{
+          interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "maladarix") {
@@ -838,9 +886,12 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Mon créateur__ ◄**\n\n + 200 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
+      
 
     }else if(code == "64zj0234") {
       if(!user.achivementsId.includes(31)) {
@@ -855,8 +906,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __T’es trop chiant !__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "1383") {
@@ -872,8 +925,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Mon niveau dans les mémoires__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "360876364041158667") {
@@ -889,8 +944,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __L’identifiant des chats__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "ysrotcodeht"|| code == "ysrotcddeht" || code == "ysrdtcddeht" || code == "ysrotcooeht" || code == "ysrdtcodeht") {
@@ -906,11 +963,13 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le ballon du lobby__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
-    }else if(code == "alestria") {
+    }else if(code == "linux") {
       if(!user.achivementsId.includes(51)) {
         user.achivementsId.push(51)
         user.succScore += 500
@@ -920,11 +979,13 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __L'assassin qui se fait ratio__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Son vrai nom__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "hazarie") {
@@ -940,11 +1001,13 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Mon animal__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
-    }else if(code == "blue haven") {
+    }else if(code == "blue haven" || code == "bluehaven") {
       if(!user.achivementsId.includes(58)) {
         user.achivementsId.push(58)
         user.succScore += 500
@@ -957,8 +1020,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __La berceuse du temps__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "43") {
@@ -974,8 +1039,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le coût des renards__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "boumata" || code == "boumata gx" || code == "boumatagx") {
@@ -988,11 +1055,13 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Le 3ème concurrent GX__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Le 1er choix__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "jelly") {
@@ -1008,11 +1077,13 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le poisson du sacrifice__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
-    }else if(code == "vibraninf") {
+    }else if(code == "mimantis" || code == "mimantis#753" || code == "mimantis 753" || code == "mimantis #753") {
       if(!user.achivementsId.includes(74)) {
         user.achivementsId.push(74)
         user.succScore += 500
@@ -1022,11 +1093,13 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Son premier pokémon__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __Un dernier lancé__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "primogem"|| code == "primogems") {
@@ -1042,8 +1115,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le 4ème mot__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "fondation" || code == "pelle de la fondation" || code == "la pelle de la fondation" || code == "pelle fondation") {
@@ -1059,8 +1134,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le rôle d’une pelle__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "ekeho") {
@@ -1076,8 +1153,10 @@ bot.on('interactionCreate', async (interaction) => {
           .setDescription(`**► __Le mythique ancestral__ ◄**\n\n + 1000 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
-          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
-        ]})
+          .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès spécial`})
+        ]}) 
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "4c4dmy1sh3re") {
@@ -1095,6 +1174,8 @@ bot.on('interactionCreate', async (interaction) => {
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
 
     }else if(code == "suff1sait2demand3r") {
@@ -1112,6 +1193,8 @@ bot.on('interactionCreate', async (interaction) => {
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
         ]})
+      }else{
+        interaction.reply({embeds: [new EmbedBuilder().setTitle("Tu as déjà réclamé ce code!")]})
       }
     }else{
       interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Code Inconnu`).setColor(colorRouge)], fetchReply: true}).then(sent => {
@@ -1145,12 +1228,11 @@ bot.on('interactionCreate', async (interaction) => {
     let nbLucioRgb = 0
     let nbLucioGold = 0
     let totalArgent = "0"
+    let totalMoneyPres = "0"
     let totalStatsScore = 0
     let totalSucces = 0
     let totalItems = 0
-    let joueurPlusRiche = null
-    let joueurPlusSucces = null
-    let joueurPlusScore = null
+    let joueurPlusRiche = []
     let ArgentArr = []
 
     fs.readFile('./data/stats.json', "utf8", (err, JsonString) => {
@@ -1162,7 +1244,8 @@ bot.on('interactionCreate', async (interaction) => {
     })
 
     listeProfiles.forEach(profil => {
-      totalArgent = parseInt(hexToInt(totalArgent)) + parseInt(hexToInt(profil.totalMoney))
+      totalArgent = intToHex(parseInt(hexToInt(totalArgent)) + parseInt(hexToInt(profil.totalMoney)))
+      totalMoneyPres = intToHex(parseInt(hexToInt(totalMoneyPres)) + parseInt(hexToInt(profil.money)))
       nbLucioThug += profil.lucioThug
       nbLucioRgb += profil.lucioRGB
       nbLucioGold += profil.lucioGold
@@ -1170,27 +1253,22 @@ bot.on('interactionCreate', async (interaction) => {
       totalSucces += profil.achivementsId.length
       totalItems += profil.totalItem
     });
-
     
     let label = []
     let data = []
-    let dataLab = []
     let richesse10 = "0"
 
     joueurPlusRiche = listeProfiles
     joueurPlusRiche.sort((a, b) => parseInt(hexToInt(a.money)) < parseInt(hexToInt(b.money)) ? 1 : -1).slice(0, 10)
-    for (let i = 0; i < 3; i++) {
-      richesse10 = parseInt(hexToInt(richesse10)) + parseInt(hexToInt(joueurPlusRiche[i].money))
-      label.push(joueurPlusRiche[i].displayName)
+    for (let i = 0; i < 5; i++) {
+      richesse10 = intToHex(parseInt(hexToInt(richesse10)) + parseInt(hexToInt(joueurPlusRiche[i].money)))
+      label.push(`${joueurPlusRiche[i].displayName}  ${approx(hexToInt(joueurPlusRiche[i].money, approxOpts))}`)
       data.push(hexToInt(joueurPlusRiche[i].money))
     }
 
+    label.push(`Autres Joueurs  ${hexToInt(totalMoneyPres) - hexToInt(richesse10)}`)
+    data.push(hexToInt(totalMoneyPres) - hexToInt(richesse10))
     
-     let datalabels =  {formatter: function(value, context) {
-        return new approx(1000, approxOpts)
-      }}
-    
-
     const chartDistribution = new ChartJsImage()
     chartDistribution.setConfig({
       type: 'pie',
@@ -1205,19 +1283,103 @@ bot.on('interactionCreate', async (interaction) => {
       },
       options: {
         plugins: {
-          datalabels: datalabels
+          datalabels: {
+            formatter: function(value, context) {
+              return context.chart.data.labels[context.dataIndex].split("  ")[1];
+            },
+            color: "white",
+            borderRadius: 6,
+            backgroundColor: '#2e2e2e',
+          }
         }
       }
     })
     .setWidth(600)
     .setHeight(500)
     .setBackgroundColor('transparent')
-    console.log(await chartDistribution.getShortUrl())
-    interaction.reply({embeds: [new EmbedBuilder().setTitle("Statistiques de Idle-Mada 📊")
+
+    let montants = []
+
+    let datasets = []
+    for (let i = 0; i < joueurPlusRiche.length; i++) {
+      for (let a = 0; a < listeCash.length; a++) {
+        if(listeCash[a].id == joueurPlusRiche[i].id) {
+          montants = []
+          for (let m = 0; m < listeCash[a].money.length; m++) {
+            montants.push(hexToInt(listeCash[a].money[m]))
+            
+          }
+          datasets.push({label: joueurPlusRiche[i].displayName, data: montants, fill: false})
+        }
+      }
+    }
+
+    const Progress = new ChartJsImage()
+    Progress.setConfig({
+      type: 'line',
+      data: {
+        labels: [52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9 ,8 ,7, 6, 5, 4, 3, 2, 1],
+        datasets: datasets
+      },
+      options: {
+        legend: {
+          labels: {
+            filter: (ds, data) => {
+              const sortable = [];
+  
+              data.datasets.forEach(d => {
+                sortable.push([d.label, d.data.reduce((a, b) => (a + b), 0)])
+              });
+  
+              sortable.sort((a, b) => (b[1] - a[1]));
+              const sorted = sortable.slice(0, 6).map(e => (e[0]));
+  
+              return sorted.includes(ds.text)
+            }
+          },
+          position: "top",
+          maxHeight: 100,
+          maxWidth: 100,
+        },
+        plugins: {
+          datalabels: {
+            display: false,
+          }
+        },
+      }
+    })
+    .setBackgroundColor('transparent')
+    .setHeight(800)
+    .setWidth(1200)
+
+    fs.readFile('./data/stats.json', "utf8", (err, JsonString) => {
+      if(err) {
+        console.log(err)
+      }else{
+        listeCash = JSON.parse(JsonString)
+      }
+    })
+
+    let page1 = new EmbedBuilder().setTitle("Statistiques de Idle-Mada 📊")
     .setColor(colorgold)
     .setDescription(`<:aykicash:1031518293456076800> Argent Total: \`${approx(hexToInt(totalArgent), approxOpts)}\`\nTotal d'objets en possession: \`${totalItems}\`\n🏆 Total score succès: \`${totalStatsScore}\` avec \`${totalSucces}\` Succès\n\n<:LucioThug:887848266597822535> Lucio Thug récoltés: \`${nbLucioThug}\`\n\n<:LucioRGB:887845591160348744> Lucio RGB récoltés: \`${nbLucioRgb}\`\n\n<:LucioGolden:887847813550055474> Lucio Doré récoltés: \`${nbLucioGold}\``)
     .setImage(await chartDistribution.getShortUrl())
-  ]})
+
+    let page2 = new EmbedBuilder().setTitle("Statistiques de Idle-Mada 📊")
+    .setDescription("Argent total depuis les 13 derniers jours en tranche de 6 heures.")
+    .setColor(colorgold)
+    .setImage(await Progress.getShortUrl())
+
+    let pages = [page1, page2]
+
+    const buttons = [
+      {emoji: '⬅', style: Discord.ButtonStyle.Primary},
+      {emoji: '❌', style: Discord.ButtonStyle.Primary},
+      {emoji: '➡', style: Discord.ButtonStyle.Primary},
+    ]
+
+    new Pagination().setCommand(interaction).setPages(pages).setButtons(buttons).send()
+  
   }
 
   if(commandName == "prestige") {
@@ -1987,6 +2149,7 @@ bot.on('interactionCreate', async (interaction) => {
           return
         }
 
+        user.dispense = intToHex(hexToInt(user.dispense) + Math.round((basePrestige * (augPrestige ** (user.prestige + parseInt(interaction.customId.split(" ")[2])) - augPrestige ** user.prestige)) / (augPrestige - 1)))
         user.totalItem = 0
         user.prestige += parseInt(interaction.customId.split(" ")[2])
         user.money = "64"
@@ -2254,7 +2417,7 @@ bot.on('interactionCreate', async (interaction) => {
         return
       }
 
-      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
+      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **30min** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
       components: [
         new ActionRowBuilder()
         .addComponents(
@@ -2272,9 +2435,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioThug ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 1.15))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 1.15)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 1.15)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 1800))))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 1800)))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps) * 1800))}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
         users = []
       }, 2000);
 
@@ -2297,7 +2460,7 @@ bot.on('interactionCreate', async (interaction) => {
         return
       }
 
-      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
+      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **2h** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
       components: [
         new ActionRowBuilder()
         .addComponents(
@@ -2315,9 +2478,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioRGB ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 2))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 2)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 2)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 7200))))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 7200)))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps) * 7200), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
         users = []
       }, 2000);
 
@@ -2340,7 +2503,7 @@ bot.on('interactionCreate', async (interaction) => {
         return
       }
 
-      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
+      interaction.message.edit({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **7h** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
       components: [
         new ActionRowBuilder()
         .addComponents(
@@ -2358,9 +2521,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioGold ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 7.77))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 7.77)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 7.77)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 25200))))
+        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 25200)))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].cps) * 25200)), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
         users = []
       }, 2000);
 
