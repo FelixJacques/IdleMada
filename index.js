@@ -214,9 +214,9 @@ function succes(user, interaction, userDem) {
         
         case "widow":
           if(has){
-            descr += `✅ **__Avant d'être un sniper__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `✅ **__L'assassin qui se fait ratio__** (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }else{
-            descr += `🔒 __Avant d'être un sniper__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
+            descr += `🔒 __L'assassin qui se fait ratio__ (+500)\n||*Claim le code secret de Takmany*||\n\n`
           }
           break
 
@@ -910,7 +910,7 @@ bot.on('interactionCreate', async (interaction) => {
         ]})
       }
 
-    }else if(code == "symmetra") {
+    }else if(code == "alestria") {
       if(!user.achivementsId.includes(51)) {
         user.achivementsId.push(51)
         user.succScore += 500
@@ -920,7 +920,7 @@ bot.on('interactionCreate', async (interaction) => {
           }, 10);
         }) 
         bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
-          .setDescription(`**► __Avant d'être un sniper__ ◄**\n\n + 500 Points de succès`)
+          .setDescription(`**► __L'assassin qui se fait ratio__ ◄**\n\n + 500 Points de succès`)
           .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
           .setColor(colorgold)
           .setAuthor({iconURL: user.avatar, name: `${user.displayName} a débloqué un succès`})
