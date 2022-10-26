@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
 const bot = new Discord.Client({intents: 3276799})
-const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ActivityType} = require('discord.js')
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder, ActivityType, Utils} = require('discord.js')
 const Pagination = require('customizable-discordjs-pagination')
+const ChartJsImage = require('chartjs-to-image')
 const fs = require("fs")
 const { DateTime } = require("luxon")
 const progressbar = require('string-progressbar');
@@ -14,7 +15,7 @@ const achiv = require('./src/succes')
 
 require("dotenv").config()
 
-let test = false
+let test = true
 if(test == true) {
   var guildId = "828485314304933931"
   var channelId = "828518673244618752"
@@ -381,7 +382,7 @@ function profilCmd(user, interaction = undefined) {
 
 setInterval(() => {
 
-  if(Math.floor(Math.random() * 400) == 69) { //300) == 69) {
+  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 2000) == 69 : Math.floor(Math.random() * 1300) == 69) { //300) == 69) {
     bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **15%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
@@ -399,7 +400,7 @@ setInterval(() => {
     })    
   }
 
-  if(Math.floor(Math.random() * 8000) == 420) { //15000) == 420) {
+  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 18000) == 420 : Math.floor(Math.random() * 10000) == 420) { //15000) == 420) {
     bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio RGB est apparu!").setDescription("Temps avant expiration: \`45sec\`\n\nClique sur **Attraper** pour instantanément gagner **100%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/lVV0vRmFjiajt0MaGo/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
@@ -417,7 +418,7 @@ setInterval(() => {
     }) 
   }
 
-  if(Math.floor(Math.random() * 15000) == 777) { //100000) == 69420) {
+  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 60000) == 777 : Math.floor(Math.random() * 40000) == 777) { //100000) == 69420) {
     bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Doré est apparu!").setDescription("Temps avant expiration: \`1min\`\n\nClique sur **Attraper** pour instantanément gagner **777%** de tes aykicash actuels en bonus!").setColor("#e3a600").setImage("https://media.giphy.com/media/evLrefMs7zA8qfZfvF/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
@@ -524,16 +525,16 @@ setInterval(() => {
     })
 
     for (let i = 0; i < acheteursEater.length; i++) {
-      if(DateTime.now().setZone("CET").hour == 12 && DateTime.now().setZone("CET").minute >= 0 && DateTime.now().setZone("CET").minute <= 12) {
+      if(DateTime.now().setZone("CET").hour == 12 && DateTime.now().setZone("CET").minute >= 12 && DateTime.now().setZone("CET").minute <= 13) {
         if(!acheteursEater[i].achivementsId.includes(20)) {
-          listeProfiles[i].achivementsId.push(20)
-          listeProfiles[i].succScore += 200
+          acheteursEater[i].achivementsId.push(20)
+          acheteursEater[i].succScore += 200
 
           bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
             .setDescription(`**► __C’est l’heure de manger !__ ◄**\n\n + 200 Points de succès`)
             .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
             .setColor(colorgold)
-            .setAuthor({iconURL: listeProfiles[i].avatar, name: `${listeProfiles[i].displayName} a débloqué un succès`})
+            .setAuthor({iconURL: acheteursEater[i].avatar, name: `${acheteursEater[i].displayName} a débloqué un succès`})
           ]})
         }
       }
@@ -541,16 +542,16 @@ setInterval(() => {
     }
 
     for (let i = 0; i < acheteursKana.length; i++) {
-      if(DateTime.now().setZone("CET").hour == 4 && DateTime.now().setZone("CET").minute >= 0 && DateTime.now().setZone("CET").minute <= 20) {
+      if(DateTime.now().setZone("CET").hour == 4 && DateTime.now().setZone("CET").minute >= 19 && DateTime.now().setZone("CET").minute <= 20) {
         if(!acheteursKana[i].achivementsId.includes(12)) {
-          listeProfiles[i].achivementsId.push(12)
-          listeProfiles[i].succScore += 200
+          acheteursKana[i].achivementsId.push(12)
+          acheteursKana[i].succScore += 200
   
           bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder()
             .setDescription(`**► __Kana Time__ ◄**\n\n + 200 Points de succès`)
             .setThumbnail("https://media.tenor.com/Ru7fdBnFsdYAAAAi/mercy-overwatch.gif")
             .setColor(colorgold)
-            .setAuthor({iconURL: listeProfiles[i].avatar, name: `${listeProfiles[i].displayName} a débloqué un succès`})
+            .setAuthor({iconURL: acheteursKana[i].avatar, name: `${acheteursKana[i].displayName} a débloqué un succès`})
           ]})
         }
       }
@@ -610,6 +611,11 @@ bot.on("ready", async () => {
       }
     ]
   })
+
+  /*commands.create({
+    name: "stats",
+    description: "Affiche les stats de l'ensemble des joueurs"
+  })*/
 
   commands.create({
     name: "shop",
@@ -1119,16 +1125,99 @@ bot.on('interactionCreate', async (interaction) => {
           console.log(err)
         }else{
           tryCode = JSON.parse(JsonString)
+
+          tryCode.push({id: interaction.member.id, code: code})
+
+          fs.writeFileSync('./data/tryCode.json', JSON.stringify(tryCode), "utf8" , function(err) {
+            if(err) throw err;})
+    
+          fs.writeFileSync('./data/tryCode2.json', JSON.stringify(tryCode), "utf8" , function(err) {
+            if(err) throw err;})
+    
+          tryCode = []
         }
       })
-
-      tryCode.push({id: interaction.member.id, code: code})
-
-      fs.writeFileSync('./data/tryCode.json', JSON.stringify(tryCode), "utf8" , function(err) {
-        if(err) throw err;})
-
-      tryCode = []
     }
+  }
+
+  if(commandName == "stats") {
+    let nbLucioThug = 0
+    let nbLucioRgb = 0
+    let nbLucioGold = 0
+    let totalArgent = "0"
+    let totalStatsScore = 0
+    let totalSucces = 0
+    let totalItems = 0
+    let joueurPlusRiche = null
+    let joueurPlusSucces = null
+    let joueurPlusScore = null
+    let ArgentArr = []
+
+    fs.readFile('./data/stats.json', "utf8", (err, JsonString) => {
+      if(err) {
+        console.log(err)
+      }else{
+        ArgentArr = JsonString.DataMoney
+      }
+    })
+
+    listeProfiles.forEach(profil => {
+      totalArgent = parseInt(hexToInt(totalArgent)) + parseInt(hexToInt(profil.totalMoney))
+      nbLucioThug += profil.lucioThug
+      nbLucioRgb += profil.lucioRGB
+      nbLucioGold += profil.lucioGold
+      totalStatsScore += profil.succScore
+      totalSucces += profil.achivementsId.length
+      totalItems += profil.totalItem
+    });
+
+    
+    let label = []
+    let data = []
+    let dataLab = []
+    let richesse10 = "0"
+
+    joueurPlusRiche = listeProfiles
+    joueurPlusRiche.sort((a, b) => parseInt(hexToInt(a.money)) < parseInt(hexToInt(b.money)) ? 1 : -1).slice(0, 10)
+    for (let i = 0; i < 3; i++) {
+      richesse10 = parseInt(hexToInt(richesse10)) + parseInt(hexToInt(joueurPlusRiche[i].money))
+      label.push(joueurPlusRiche[i].displayName)
+      data.push(hexToInt(joueurPlusRiche[i].money))
+    }
+
+    
+     let datalabels =  {formatter: function(value, context) {
+        return new approx(1000, approxOpts)
+      }}
+    
+
+    const chartDistribution = new ChartJsImage()
+    chartDistribution.setConfig({
+      type: 'pie',
+      data: {
+        labels: label,
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: data,
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          datalabels: datalabels
+        }
+      }
+    })
+    .setWidth(600)
+    .setHeight(500)
+    .setBackgroundColor('transparent')
+    console.log(await chartDistribution.getShortUrl())
+    interaction.reply({embeds: [new EmbedBuilder().setTitle("Statistiques de Idle-Mada 📊")
+    .setColor(colorgold)
+    .setDescription(`<:aykicash:1031518293456076800> Argent Total: \`${approx(hexToInt(totalArgent), approxOpts)}\`\nTotal d'objets en possession: \`${totalItems}\`\n🏆 Total score succès: \`${totalStatsScore}\` avec \`${totalSucces}\` Succès\n\n<:LucioThug:887848266597822535> Lucio Thug récoltés: \`${nbLucioThug}\`\n\n<:LucioRGB:887845591160348744> Lucio RGB récoltés: \`${nbLucioRgb}\`\n\n<:LucioGolden:887847813550055474> Lucio Doré récoltés: \`${nbLucioGold}\``)
+    .setImage(await chartDistribution.getShortUrl())
+  ]})
   }
 
   if(commandName == "prestige") {
@@ -1908,11 +1997,7 @@ bot.on('interactionCreate', async (interaction) => {
           user[farm.farm].number = 0
         });
 
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`**${user.displayName}** a atteint le niveau **${user.prestige}** de prestige!💎`).setColor(colorgold)], fetchReply: true}).then(sent => {
-          setTimeout(() => {
-            sent.delete()
-          }, 3000);
-        })
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`**${user.displayName}** a atteint le niveau **${user.prestige}** de prestige!💎`).setColor(colorgold)]})
 
       }else{
         interaction.reply({embeds: [new EmbedBuilder().setDescription(`<@${interaction.member.id}> Tu n'as pas accès a ce bouton`).setColor(colorRouge)], fetchReply: true}).then(sent => {
@@ -2187,6 +2272,7 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioThug ++
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 1.15))))
         users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 1.15)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 1.15)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
         users = []
@@ -2229,6 +2315,7 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioRGB ++
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 2))))
         users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 2)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 2)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
         users = []
@@ -2271,6 +2358,7 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioGold ++
+        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 7.77))))
         users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].money) * 7.77)))
         interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].money) * 7.77)) - hexToInt(users[0].money), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
         users = []
