@@ -391,7 +391,7 @@ function profilCmd(user, interaction = undefined) {
 
 setInterval(() => {
 
-  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 1700) == 69 : Math.floor(Math.random() * 1100) == 69) { //300) == 69) {
+  if(DateTime.now().setZone("America/Montreal").hour > 22 && DateTime.now().setZone("America/Montreal").hour < 5 ? Math.floor(Math.random() * 1600) == 69 : Math.floor(Math.random() * 800) == 69) { //300) == 69) {
     bot.channels.cache.get(channelId).send({embeds: [new EmbedBuilder().setTitle("Un Lucio Thug est apparu!").setDescription("Temps avant expiration: \`30sec\`\n\nClique sur **Attraper** pour instantanément gagner **30min** de votre revenu!").setColor("#e3a600").setImage("https://media.giphy.com/media/f4JAcG9w0YnFVy3wx6/giphy.gif")], fetchReply: true,
     components: [
       new ActionRowBuilder()
@@ -505,9 +505,22 @@ setInterval(() => {
     + ((hexToInt(Farm.prototype.gazette().cps) * profil.gazette.multi) * profil.gazette.number) + ((hexToInt(Farm.prototype.cite().cps) * profil.cite.multi) * profil.cite.number) + ((hexToInt(Farm.prototype.casino().cps) * profil.casino.multi) * profil.casino.number) 
     + ((hexToInt(Farm.prototype.academy().cps) * profil.academy.multi) * profil.academy.number) + ((hexToInt(Farm.prototype.papa().cps) * profil.papa.multi) * profil.papa.number) + ((hexToInt(Farm.prototype.vip().cps) * profil.vip.multi) * profil.vip.number) + ((hexToInt(Farm.prototype.fragment().cps) * profil.fragment.multi) * profil.fragment.number)).toFixed(0)
 
+    let bonusSucc = 1
+    /*if(Math.floor(profil.succScore / 1000) == 1) {
+      bonusSucc = 1.05
+    }else if(Math.floor(profil.succScore / 1000) == 2) {
+      bonusSucc = 1.10
+    }else if(Math.floor(profil.succScore / 1000) == 3) {
+      bonusSucc = 1.20
+    }else if(Math.floor(profil.succScore / 1000) == 4) {
+      bonusSucc = 1.50
+    }else if(Math.floor(profil.succScore / 1000) == 5) {
+      bonusSucc = 2
+    }*/
+
     profil.cps = intToHex(profit)
     profil.totalMoney = intToHex(parseInt(hexToInt(profil.money)) + parseInt(hexToInt(profil.dispense)))
-    profil.money = intToHex(parseInt(hexToInt(profil.money)) + Math.round((gainPrestige ** profil.prestige) * parseInt(hexToInt(profil.cps))))
+    profil.money = intToHex(parseInt(hexToInt(profil.money)) + (Math.round(((gainPrestige ** profil.prestige) * parseInt(hexToInt(profil.cps))) * bonusSucc)))
 
     profil.genji.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.genji().cps) * profil.genji.multi) * profil.genji.number) + BigInt(hexToInt(profil.genji.totalCash)))
     profil.health.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.health().cps) * profil.health.multi) * profil.health.number) + BigInt(hexToInt(profil.health.totalCash)))
@@ -522,6 +535,7 @@ setInterval(() => {
     profil.bombe.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.bombe().cps) * profil.bombe.multi) * profil.bombe.number) + BigInt(hexToInt(profil.bombe.totalCash)))
     profil.belugod.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.belugods().cps) * profil.belugod.multi) * profil.belugod.number) + BigInt(hexToInt(profil.belugod.totalCash)))
     profil.widow.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.widow().cps) * profil.widow.multi) * profil.widow.number) + BigInt(hexToInt(profil.widow.totalCash)))
+    profil.aimbot.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.aimbot().cps) * profil.aimbot.multi) * profil.aimbot.number) + BigInt(hexToInt(profil.aimbot.totalCash)))
     profil.nexus.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.nexus().cps) * profil.nexus.multi) * profil.nexus.number) + BigInt(hexToInt(profil.nexus.totalCash)))
     profil.shulker.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.shulker().cps) * profil.shulker.multi) * profil.shulker.number) + BigInt(hexToInt(profil.shulker.totalCash)))
     profil.leviator.totalCash = intToHex(BigInt((hexToInt(Farm.prototype.leviator().cps) * profil.leviator.multi) * profil.leviator.number) + BigInt(hexToInt(profil.leviator.totalCash)))
@@ -2101,7 +2115,7 @@ bot.on('interactionCreate', async (interaction) => {
 
       user[type.farm].number += parseInt(nombre)
       user.money = intToHex(hexToInt(user.money) - cost)
-      user.dispense = intToHex(parseInt(hexToInt(user.dispense) + cost))
+      user.dispense = intToHex(parseInt(hexToInt(user.dispense)) + cost)
 
       if(type.farm == "kana") {
         acheteursKana.push(user)
@@ -2140,7 +2154,7 @@ bot.on('interactionCreate', async (interaction) => {
           return
         }
 
-        user.dispense = intToHex(hexToInt(user.dispense) + Math.round((basePrestige * (augPrestige ** (user.prestige + parseInt(interaction.customId.split(" ")[2])) - augPrestige ** user.prestige)) / (augPrestige - 1)))
+        user.dispense = intToHex(parseInt(hexToInt(user.dispense)) + Math.round((basePrestige * (augPrestige ** (user.prestige + parseInt(interaction.customId.split(" ")[2])) - augPrestige ** user.prestige)) / (augPrestige - 1)))
         user.totalItem = 0
         user.prestige += parseInt(interaction.customId.split(" ")[2])
         user.money = "64"
@@ -2426,9 +2440,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioThug ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 1800))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 1800)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps) * 1800))}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
+        
+        users[0].money = intToHex(parseInt(hexToInt(users[0].money)) + (parseInt(hexToInt(users[0].cps)) * 1800))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Thug**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps)) * 1800)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/5xmeXyu.png")]})
         users = []
       }, 2000);
 
@@ -2469,9 +2483,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioRGB ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 7200))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 7200)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps) * 7200), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
+        
+        users[0].money = intToHex(parseInt(hexToInt(users[0].money)) + (parseInt(hexToInt(users[0].cps)) * 7200))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio RGB**!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps)) * 7200, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/veauIgY.png")]})
         users = []
       }, 2000);
 
@@ -2512,9 +2526,9 @@ bot.on('interactionCreate', async (interaction) => {
         if(users.length == 0) return
         interaction.message.delete()
         users[0].lucioGold ++
-        console.log(intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 25200))))
-        users[0].money = intToHex(Math.round(parseFloat(hexToInt(users[0].cps) * 25200)))
-        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt((hexToInt(users[0].cps) * 25200)), approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
+        
+        users[0].money = intToHex(parseInt(hexToInt(users[0].money)) + (parseInt(hexToInt(users[0].cps)) * 25200))
+        interaction.channel.send({embeds: [new EmbedBuilder().setDescription(`<@${users[0].id}> A attrapé un **Lucio Doré**!!!!\nIl lui rapporte **${approx(parseInt(hexToInt(users[0].cps)) * 25200, approxOpts)}** <:aykicash:1031518293456076800>`).setColor(colorVert).setThumbnail("https://i.imgur.com/tUUfGxu.png")]})
         users = []
       }, 2000);
 
