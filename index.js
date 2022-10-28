@@ -14,7 +14,7 @@ const Upgrades = require('./src/upgrades/upgrades')
 const achiv = require('./src/succes')
 
 require("dotenv").config()
-
+//EASTER EGG HAHAHAHAHHAHAAH I HACK MADA IDLE
 let test = false
 if(test == true) {
   var guildId = "828485314304933931"
